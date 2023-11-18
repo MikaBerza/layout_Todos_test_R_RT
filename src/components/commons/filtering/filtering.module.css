@@ -1,0 +1,50 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--lightGrey2-color);
+  border: 1px solid var(--lightGrey2-color);
+  border-radius: 0 0 8px 8px;
+}
+
+.wrapper::after {
+  position: absolute;
+  top: 67%;
+  right: 8px;
+  width: 15px;
+  height: 15px;
+  background-image: url('../../../assets/VectorDown.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  pointer-events: none;
+  content: '';
+}
+
+.text {
+  padding-left: 6px;
+}
+
+.select {
+  padding: 6px;
+  padding-right: 25px;
+  box-sizing: border-box;
+  color: var(--dimgray-color);
+  background-color: var(--lightGrey2-color);
+  border: 1px solid var(--lightGrey2-color);
+  border-radius: 0px 0px 8px 8px;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: background-color 0.3s ease;
+}
+
+.select:hover {
+  background-color: var(--white-color);
+  cursor: pointer;
+}
+
+.select:active {
+  box-shadow: 0 0 10px var(--lightGrey2-color);
+  border: 1px solid var(--lightGrey2-color);
+}

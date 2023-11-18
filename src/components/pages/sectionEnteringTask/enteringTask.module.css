@@ -1,0 +1,11 @@
+.wrapper {
+  align-self: stretch;
+  width: 478px;
+  padding: 0px 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}

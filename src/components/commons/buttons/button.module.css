@@ -1,0 +1,31 @@
+.btn {
+  width: 30%;
+  padding: 10px;
+  font-weight: 400;
+  color: var(--black-color);
+  background-color: var(--lightGrey-color);
+  border: 1px solid var(--lightGrey-color);
+  border-radius: 8px;
+  transition:
+    font-weight 0.3s ease,
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border 0.3s ease;
+}
+
+.edit-w2 {
+  width: 100%;
+}
+
+.btn:hover {
+  color: var(--white-color);
+  background-color: var(--mapleGreen-color);
+  border: 1px solid var(--mapleGreen-color);
+  cursor: pointer;
+}
+
+.btn:active {
+  color: var(--lightGrey-color);
+  background-color: var(--emeraldGreen-color);
+  border: 1px solid var(--emeraldGreen-color);
+}

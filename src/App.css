@@ -1,0 +1,38 @@
+:root {
+  --tomato-color: rgba(255, 99, 71, 0.5);
+  --tomato2-color: #CD5C5C;
+  --darkAzure-color: #0088cc;
+  --dimgray-color: #696969;
+  --lightGrey-color: #BCBCBC;
+  --lightGrey2-color: #f2f2f2;
+  --white-color: white;
+  --black-color: black;
+  --mapleGreen-color: #507D2A;
+  --emeraldGreen-color: #287233;
+  --beige100-color: #F9F7F4;
+}
+
+body {
+  background-color: var(--beige100-color);
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* .w1 {
+  max-width: 1120px;
+  margin: 10px auto 0px auto;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.dn {
+  display: none;
+} */
