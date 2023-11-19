@@ -1,3 +1,9 @@
+.wrapper {
+  max-width: 1120px;
+  margin: 10px auto 0px auto;
+  padding: 0 10px;
+}
+
 .inner {
   display: flex;
   align-items: center;
