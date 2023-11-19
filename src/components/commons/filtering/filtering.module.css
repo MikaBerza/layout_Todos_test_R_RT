@@ -28,6 +28,7 @@
   padding: 6px;
   padding-right: 25px;
   box-sizing: border-box;
+  font-size: 18px;
   color: var(--dimgray-color);
   background-color: var(--lightGrey2-color);
   border: 1px solid var(--lightGrey2-color);

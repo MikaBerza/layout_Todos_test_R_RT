@@ -1,8 +1,12 @@
-.wrapper {}
+.wrapper {
+  font-family: 'Roboto';
+}
 
 .item {
   width: 100%;
   height: auto;
+  box-sizing: border-box;
+  padding: 6px;
   background-color: var(--lightGrey2-color);
   border: 1px solid var(--lightGrey2-color);
   border-radius: 8px 8px 0 0;
@@ -10,11 +14,12 @@
   transition: background-color 0.3s ease;
 }
 
-.item:hover {
-  background-color: var(--white-color);
+.item::placeholder {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 200;
 }
 
-.item {
-  box-sizing: border-box;
-  padding: 6px;
+.item:hover {
+  background-color: var(--white-color);
 }

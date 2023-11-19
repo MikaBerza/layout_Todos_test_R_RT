@@ -1,6 +1,7 @@
 .btn {
   width: 30%;
   padding: 10px;
+  font-size: 18px;
   font-weight: 400;
   color: var(--black-color);
   background-color: var(--lightGrey-color);

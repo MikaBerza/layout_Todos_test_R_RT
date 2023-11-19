@@ -12,9 +12,9 @@
 }
 
 .item::placeholder {
+  font-family: 'Roboto';
   font-size: 20px;
   font-weight: 200;
-  font-style: oblique;
 }
 
 .item:hover {
