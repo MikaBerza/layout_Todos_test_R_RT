@@ -3,6 +3,7 @@ import style from './homePage.module.css';
 
 import Header from '../commons/headers/Header';
 import Content from './content/Content';
+import Footer from '../commons/footers/Footer';
 
 function HomePage() {
   return (
@@ -10,7 +11,7 @@ function HomePage() {
       <div className={style.wrapper}>
         <Header title={'Todos'} />
         <Content />
-        <footer className='footers w1'>
+        {/* <footer className='footers w1'>
           <div className='footers__container'>
             <div className='footers__text'>
               <span>Наши социальные сети</span>
@@ -70,7 +71,8 @@ function HomePage() {
               </div>
             </div>
           </div>
-        </footer>
+        </footer> */}
+        <Footer />
       </div>
     </>
   );

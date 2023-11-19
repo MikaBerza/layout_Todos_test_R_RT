@@ -2,12 +2,7 @@
   text-align: center;
 }
 
-.wrapper {
-  max-width: 1120px;
-  margin: 10px auto 0px auto;
-}
-
-.title {
+.mainTitle {
   margin: 0;
   font-size: 90px;
   color: var(--tomato-color);

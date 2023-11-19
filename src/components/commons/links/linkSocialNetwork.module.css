@@ -1,0 +1,19 @@
+.item:not(:last-child) {
+  margin-right: 26px;
+}
+
+.logotype {
+  margin-right: 6px;
+  vertical-align: sub;
+}
+
+.name {
+  color: var(--tomato-color);
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.name:hover {
+  border-bottom: 1px solid var(--tomato-color);
+  cursor: pointer;
+}

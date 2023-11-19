@@ -4,7 +4,7 @@ import style from './header.module.css';
 function Header({ title }) {
   return (
     <header className={style.wrapper}>
-      <h1 className={style.title}>{title}</h1>
+      <h1 className={style.mainTitle}>{title}</h1>
     </header>
   );
 }
