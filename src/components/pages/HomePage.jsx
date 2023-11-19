@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './homePage.module.css';
 
-import Header from '../commons/header/Header';
+import Header from '../commons/headers/Header';
 import Content from './content/Content';
 
 function HomePage() {

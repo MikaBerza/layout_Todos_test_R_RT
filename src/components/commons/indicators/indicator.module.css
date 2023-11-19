@@ -13,7 +13,7 @@
   margin-right: 5px;
 }
 
-.indicator {
+.stripe {
   position: relative;
   width: 70%;
   height: 40px;
@@ -22,7 +22,7 @@
   text-align: end;
 }
 
-.indicator::after {
+.stripe::after {
   position: absolute;
   top: 26%;
   width: 30%;

@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './counters.module.css';
+import style from './indicator.module.css';
 //
-function Counters({ nameOfStatuses }) {
+function Indicator({ nameOfStatuses }) {
   return (
     <div className={style.wrapper}>
       <div className={style.tasks}>
@@ -10,7 +10,7 @@ function Counters({ nameOfStatuses }) {
         })}
       </div>
       <meter
-        className={style.indicator}
+        className={style.stripe}
         value='0'
         min='0'
         max='0'
@@ -21,4 +21,4 @@ function Counters({ nameOfStatuses }) {
   );
 }
 
-export default Counters;
+export default Indicator;
