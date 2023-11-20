@@ -8,7 +8,7 @@ function App() {
     <>
       <Header title={'Todos'} />
       <HomePage />
-      <Footer />
+      <Footer caption={'Наши социальные сети'} />
     </>
   );
 }

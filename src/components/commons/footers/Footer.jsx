@@ -8,12 +8,12 @@ import LinkSocialNetwork from '../links/LinkSocialNetwork';
 
 import style from './footer.module.css';
 
-function Footer() {
+function Footer({ caption }) {
   return (
     <footer className={style.wrapper}>
       <div className={style.inner}>
         <div className={style.text}>
-          <span>Наши социальные сети</span>
+          <span>{caption}</span>
         </div>
         <div className={style.socials}>
           <LinkSocialNetwork
