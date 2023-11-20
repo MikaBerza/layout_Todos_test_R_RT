@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './linkSocialNetwork.module.css';
-//
+
 function LinkSocialNetwork({ name, logo, address }) {
   return (
     <div className={style.item}>

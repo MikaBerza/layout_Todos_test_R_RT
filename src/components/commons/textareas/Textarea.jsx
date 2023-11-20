@@ -1,12 +1,12 @@
 import React from 'react';
 import style from './textarea.module.css';
-//
-function Textarea() {
+
+function Textarea({ placeholders }) {
   return (
     <textarea
       className={style.item}
       rows='13'
-      placeholder='Что нужно сделать?'
+      placeholder={placeholders}
     ></textarea>
   );
 }

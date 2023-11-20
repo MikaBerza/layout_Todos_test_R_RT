@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './task.module.css';
-//
+
 function Task({ note, checking, calendarDate, sign }) {
   return (
     <li className={style.item}>

@@ -64,6 +64,9 @@
   cursor: pointer;
 }
 
+.completed {
+  text-decoration: line-through;
+}
 
 @media (max-width: 767px) {
 

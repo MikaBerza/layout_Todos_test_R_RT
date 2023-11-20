@@ -1,12 +1,13 @@
 import React from 'react';
-import style from './footer.module.css';
 
 import instagramLogo from '../../../assets/images/instagramIcon.png';
 import facebookLogo from '../../../assets/images/facebookIcon.png';
 import vkontakteLogo from '../../../assets/images/vkontakteIcon.png';
 
 import LinkSocialNetwork from '../links/LinkSocialNetwork';
-//
+
+import style from './footer.module.css';
+
 function Footer() {
   return (
     <footer className={style.wrapper}>
