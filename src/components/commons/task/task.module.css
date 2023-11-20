@@ -65,14 +65,21 @@
 }
 
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
 
-  .wrapper {
-    max-width: 600px;
-    margin: auto;
+  .inner1,
+  .inner2 {
+    margin-left: 10px;
   }
 
-  .list {
-    margin-top: 10px;
+  .remove {
+    display: block;
+    padding: 6px 10px;
+    font-weight: 900;
   }
+
+  .checkbox[type=checkbox] {
+    margin: 5px 10px;
+  }
+
 }

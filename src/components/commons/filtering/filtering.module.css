@@ -49,3 +49,15 @@
   box-shadow: 0 0 10px var(--lightGrey2-color);
   border: 1px solid var(--lightGrey2-color);
 }
+
+@media (max-width: 1023px) {
+  .select {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .select {
+    font-size: 15px;
+  }
+}

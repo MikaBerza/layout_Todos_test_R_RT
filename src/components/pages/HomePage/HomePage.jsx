@@ -4,21 +4,15 @@ import style from './homePage.module.css';
 import Search from '../../commons/searches/Search';
 import Indicator from '../../commons/indicators/Indicator';
 import Filtering from '../../commons/filtering/Filtering';
-
 import Textarea from '../../commons/textareas/Textarea';
 import Button from '../../commons/buttons/Button';
-
 import Task from '../../commons/task/Task';
 
-// import Control from '../../section/sectionControl/Control';
-// import EnteringTask from '../../section/sectionEnteringTask/EnteringTask';
-// import OutputTask from '../../section/sectionOutputTask/OutputTask';
 
 function HomePage() {
   return (
     <>
-      <main className={style.wrapper}>
-        <div className={style.inner}>
+      <main className={style.content}>
           <section className={style.control}>
             <Search placeholders={'🔍 поиск задач'} />
             <Indicator nameOfStatuses={['всего', 'активно', 'завершено']} />
@@ -45,9 +39,26 @@ function HomePage() {
                 calendarDate={'22/12/22, 13:32'}
                 sign={'x'}
               />
+              <Task
+                note={'текст2'}
+                checking={'off'}
+                calendarDate={'22/12/22, 13:32'}
+                sign={'x'}
+              />
+              <Task
+                note={'текст3'}
+                checking={'off'}
+                calendarDate={'22/12/22, 13:32'}
+                sign={'x'}
+              />
+              <Task
+                note={'текст4'}
+                checking={'off'}
+                calendarDate={'22/12/22, 13:32'}
+                sign={'x'}
+              />
             </ul>
           </section>
-        </div>
       </main>
     </>
   );
