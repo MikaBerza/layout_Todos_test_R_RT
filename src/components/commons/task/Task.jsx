@@ -1,20 +1,33 @@
 import React from 'react';
 import style from './task.module.css';
 
-function Task({ note, checking, calendarDate, sign }) {
+function Task({
+  id,
+  note,
+  calendarDate,
+  sign,
+  checking,
+  handleCheckboxChange,
+  removeTask,
+}) {
   return (
     <li className={style.item}>
       <div className={style.inner1}>
-        <span className={style.text}>{note}</span>
+        <span className={`${checking ? style.completed : ''} ${style.text}`}>
+          {note}
+        </span>
         <input
           className={style.checkbox}
           type='checkbox'
-          checked={checking}
+          defaultChecked={checking}
+          onClick={() => handleCheckboxChange(id)}
         />
       </div>
       <div className={style.inner2}>
         <span className={style.date}>{calendarDate}</span>
-        <span className={style.remove}>{sign}</span>
+        <span className={style.remove} onClick={() => removeTask(id)}>
+          {sign}
+        </span>
       </div>
     </li>
   );
