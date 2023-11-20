@@ -17,3 +17,11 @@
   border-bottom: 1px solid var(--tomato-color);
   cursor: pointer;
 }
+
+@media (max-width: 1023px) {
+  .item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}

@@ -16,15 +16,24 @@
 
 .text {
   max-width: 222px;
-  color: var(--tomato-color);
-}
-
-.text {
   font-size: 20px;
   font-weight: 400;
   line-height: 142%;
+  color: var(--tomato-color);
 }
 
-.links {
+.socials {
   display: flex;
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    justify-content: center;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .text {
+    display: none;
+  }
 }

@@ -47,3 +47,10 @@
   background-color: var(--emeraldGreen-color);
   border: 1px solid var(--emeraldGreen-color);
 }
+
+@media (max-width: 1023px) {
+
+  .item {
+    height: 100px;
+  }
+}

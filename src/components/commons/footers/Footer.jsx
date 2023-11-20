@@ -14,7 +14,7 @@ function Footer() {
         <div className={style.text}>
           <span>Наши социальные сети</span>
         </div>
-        <div className={style.links}>
+        <div className={style.socials}>
           <LinkSocialNetwork
             name={'instagram'}
             logo={instagramLogo}
