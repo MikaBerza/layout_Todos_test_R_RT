@@ -4,12 +4,12 @@
   background-color: var(--lightGrey2-color);
 }
 
-.tasks {
+.name {
   display: flex;
   padding: 6px 6px 0 6px;
 }
 
-.tasks span:not(:last-child) {
+.name span:not(:last-child) {
   margin-right: 5px;
 }
 

@@ -4,7 +4,7 @@ import style from './indicator.module.css';
 function Indicator({ nameOfStatuses }) {
   return (
     <div className={style.wrapper}>
-      <div className={style.tasks}>
+      <div className={style.name}>
         {nameOfStatuses.map((item, index) => {
           return <span key={index}>{item}</span>;
         })}
