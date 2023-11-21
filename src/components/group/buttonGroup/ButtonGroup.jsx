@@ -1,7 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTaskListData } from '../../../redux/slices/taskListDataSlice.js';
+import {
+  setTaskListData,
+  setShowTasks,
+} from '../../../redux/slices/taskListDataSlice.js';
 import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
+import {
+  // setRemoveButton,
+  setEditButton,
+} from '../../../redux/slices/buttonGroupSlice.js';
 
 import {
   generateId,
@@ -22,6 +29,9 @@ const ButtonGroup = () => {
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
   const { textareaMessage } = useSelector(
     (state) => state.textareaMessageSlice
+  );
+  const { removeButton, editButton } = useSelector(
+    (state) => state.buttonGroupSlice
   );
   /*
      useDispatch - это хук библиотеки Redux, используем его
@@ -90,11 +100,47 @@ const ButtonGroup = () => {
     }
   };
 
+  // функция, добавить редактируемую задачу в список задач
+  const addEditableTaskToTheList = () => {
+    const updatedTaskList = taskListData.map((item) => {
+      if (item.editing === true && textareaMessage.length !== 0) {
+        console.log('Выход из режим редактирования_1');
+        // обновляем(очищаем) поле textarea
+        dispatch(setTextareaMessage(''));
+        // скрываем кнопку (редактировать) изменим ее состояние на (false), показываем остальные кнопки
+        dispatch(setEditButton(false));
+        // показываем все задачи, обновляя состояние
+        dispatch(setShowTasks(true));
+
+        // изменяем значение поля с записью (note), на то которое в textarea
+        // изменяем состояние поля с ключом (editing), с (true) на (false)
+        const newItem = { ...item, note: textareaMessage, editing: false };
+        return newItem;
+      }
+      // возвращаем элемент массива без изменений если он не соответствует условию
+      return item;
+    });
+    // обновляем данные списка задач
+    dispatch(setTaskListData(updatedTaskList));
+    // записываем данные в localStorage
+    writeToLocalStorage(updatedTaskList);
+    console.log('Выход из режим редактирования_2');
+  };
+
   return (
     <div className={style.buttons}>
-      <Button name={'Выбрать всё'} />
-      <Button name={'Удалить'} />
-      <Button name={'Добавить'} addTaskToTheList={addTaskToTheList} />
+      {editButton === false ? (
+        <>
+          <Button name={'Выбрать всё'} />
+          {removeButton === false ? '' : <Button name={'Удалить'} />}
+          <Button name={'Добавить'} handleButtonClick={addTaskToTheList} />
+        </>
+      ) : (
+        <Button
+          name={'Редактировать'}
+          handleButtonClick={addEditableTaskToTheList}
+        />
+      )}
     </div>
   );
 };

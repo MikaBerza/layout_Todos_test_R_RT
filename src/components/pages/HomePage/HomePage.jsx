@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTaskListData } from '../../../redux/slices/taskListDataSlice.js';
 
 import Search from '../../commons/searches/Search';
 import Indicator from '../../commons/indicators/Indicator';
@@ -7,6 +8,8 @@ import Filtering from '../../commons/filtering/Filtering';
 import Textarea from '../../commons/textareas/Textarea';
 import ButtonGroup from '../../group/buttonGroup/ButtonGroup.jsx';
 import Task from '../../commons/task/Task';
+
+import { writeToLocalStorage } from '../../../utils/modules.js';
 
 import style from './homePage.module.css';
 
@@ -17,13 +20,27 @@ const HomePage = () => {
      с помощью селектора taskListDataSlice 
   */
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (taskListData === null) {
-      console.log('localStorage-ПУСТ!!!', taskListData);
-    } else if (taskListData !== null) {
-      console.log('localStorage-НЕ ПУСТ!!!', taskListData);
-    }
+    console.log(taskListData, 'taskListData');
+    // если во время редактирования задачи, страница перезагрузиться,
+    // данные с ключом editing(состояние редактирования) перезапишутся
+    return () => {
+      const updatedTaskList = taskListData.map((item) => {
+        if (item.editing === true) {
+          // изменяем состояние поля с ключом (editing), с (true) на (false)
+          const newItem = { ...item, editing: false };
+          return newItem;
+        }
+        // возвращаем элемент массива без изменений если он не соответствует условию
+        return item;
+      });
+      // обновляем данные списка задач
+      dispatch(setTaskListData(updatedTaskList));
+      // обновляем данные в localStorage
+      writeToLocalStorage(updatedTaskList);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,6 +74,7 @@ const HomePage = () => {
                       calendarDate={item.date}
                       sign={item.sign}
                       checking={item.tick}
+                      editing={item.editing}
                     />
                   );
                 })}

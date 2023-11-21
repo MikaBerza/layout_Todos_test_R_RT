@@ -4,6 +4,7 @@ import { checkLocalStorageForNull } from '../../utils/modules';
 // первое состояние
 const initialState = {
   taskListData: checkLocalStorageForNull(),
+  showTasks: true,
 };
 
 export const taskListDataSlice = createSlice({
@@ -13,9 +14,12 @@ export const taskListDataSlice = createSlice({
     setTaskListData(state, action) {
       state.taskListData = action.payload;
     },
+    setShowTasks(state, action) {
+      state.showTasks = action.payload;
+    },
   },
 });
 
-export const { setTaskListData } = taskListDataSlice.actions;
+export const { setTaskListData, setShowTasks } = taskListDataSlice.actions;
 
 export default taskListDataSlice.reducer;

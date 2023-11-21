@@ -14,10 +14,6 @@
     border 0.3s ease;
 }
 
-.edit-w2 {
-  width: 100%;
-}
-
 .item:hover {
   color: var(--white-color);
   background-color: var(--mapleGreen-color);
