@@ -4,7 +4,7 @@ import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.j
 
 import style from './textarea.module.css';
 
-function Textarea({ placeholders }) {
+const Textarea = ({ placeholders }) => {
   const { textareaMessage } = useSelector(
     (state) => state.textareaMessageSlice
   );
@@ -24,6 +24,6 @@ function Textarea({ placeholders }) {
       onChange={handleTextareaMessageChange}
     ></textarea>
   );
-}
+};
 
 export default Textarea;

@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './filtering.module.css';
 
-function Filtering({ title, nameOfFilters }) {
+const Filtering = ({ title, nameOfFilters }) => {
   return (
     <div className={style.wrapper}>
       <span className={style.text}>{title}</span>
@@ -16,6 +16,6 @@ function Filtering({ title, nameOfFilters }) {
       </select>
     </div>
   );
-}
+};
 
 export default Filtering;

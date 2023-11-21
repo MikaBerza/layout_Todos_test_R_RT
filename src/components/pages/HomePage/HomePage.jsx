@@ -18,7 +18,7 @@ import Task from '../../commons/task/Task';
 
 import style from './homePage.module.css';
 
-function HomePage() {
+const HomePage = () => {
   /* 
      используем хук useSelector из библиотеки Redux 
      для получения значений (taskListData) из состояния,
@@ -43,6 +43,7 @@ function HomePage() {
     } else if (taskListData !== null) {
       console.log('localStorage-НЕ ПУСТ!!!', taskListData);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // функция, добавить задачу в список задач
@@ -145,6 +146,6 @@ function HomePage() {
       </main>
     </>
   );
-}
+};
 
 export default HomePage;

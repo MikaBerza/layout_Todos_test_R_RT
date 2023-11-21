@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './indicator.module.css';
 
-function Indicator({ nameOfStatuses }) {
+const Indicator = ({ nameOfStatuses }) => {
   return (
     <div className={style.wrapper}>
       <div className={style.name}>
@@ -19,6 +19,6 @@ function Indicator({ nameOfStatuses }) {
       ></meter>
     </div>
   );
-}
+};
 
 export default Indicator;

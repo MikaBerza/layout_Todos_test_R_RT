@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './header.module.css';
 
-function Header({ title }) {
+const Header = ({ title }) => {
   return (
     <header className={style.wrapper}>
       <h1 className={style.mainTitle}>{title}</h1>

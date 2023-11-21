@@ -8,7 +8,7 @@ import LinkSocialNetwork from '../links/LinkSocialNetwork';
 
 import style from './footer.module.css';
 
-function Footer({ caption }) {
+const Footer = ({ caption }) => {
   return (
     <footer className={style.wrapper}>
       <div className={style.inner}>
@@ -35,6 +35,6 @@ function Footer({ caption }) {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

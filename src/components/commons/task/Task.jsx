@@ -6,7 +6,7 @@ import { writeToLocalStorage } from '../../../utils/modules.js';
 
 import style from './task.module.css';
 
-function Task({ id, note, calendarDate, sign, checking }) {
+const Task = ({ id, note, calendarDate, sign, checking }) => {
   /* 
      используем хук useSelector из библиотеки Redux 
      для получения значений (taskListData) из состояния,
@@ -70,6 +70,6 @@ function Task({ id, note, calendarDate, sign, checking }) {
       </div>
     </li>
   );
-}
+};
 
 export default Task;

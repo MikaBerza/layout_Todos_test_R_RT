@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './linkSocialNetwork.module.css';
 
-function LinkSocialNetwork({ name, logo, address }) {
+const LinkSocialNetwork = ({ name, logo, address }) => {
   return (
     <div className={style.item}>
       <img className={style.logotype} src={logo} alt='logo' />
@@ -10,6 +10,6 @@ function LinkSocialNetwork({ name, logo, address }) {
       </a>
     </div>
   );
-}
+};
 
 export default LinkSocialNetwork;
