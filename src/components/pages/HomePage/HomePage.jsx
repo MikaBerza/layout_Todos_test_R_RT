@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setTaskListData } from '../../../redux/slices/taskListDataSlice.js';
 import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
 
 import {
   generateId,
   checkLengthOfTheString,
-  checkLocalStorageForNull,
   writeToLocalStorage,
-  returnAnObjectWithDataFromLocalStorage,
 } from '../../../utils/modules.js';
 
 import Search from '../../commons/searches/Search';
@@ -20,58 +19,58 @@ import Task from '../../commons/task/Task';
 import style from './homePage.module.css';
 
 function HomePage() {
-  const [taskListData, setTaskListData] = React.useState(null);
-  const dispatch = useDispatch();
-  /* используем хук useSelector из библиотеки Redux 
-     для получения значений (textareaMessage) из состояния,
-     с помощью селектора textareaMessageSlice */
+  /* 
+     используем хук useSelector из библиотеки Redux 
+     для получения значений (taskListData) из состояния,
+     с помощью селектора taskListDataSlice 
+  */
+  const { taskListData } = useSelector((state) => state.taskListDataSlice);
   const { textareaMessage } = useSelector(
     (state) => state.textareaMessageSlice
   );
-  // const { id, note, date, tick, editing, sign } = useSelector(
-  //   (state) => state.taskListDataSlice
-  // );
+  /*
+  useDispatch - это хук библиотеки Redux, используем его
+  для получения функции dispatch из Redux store. 
+  Функция dispatch принимает действие(action) в качестве аргумента
+  и передает его в редюсеры для обновления состояния приложения.
+  Вызов функции dispatch позволяет инициировать изменения состояния Redux.
+  */
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (checkLocalStorageForNull() === true) {
-      // возвращаем объект с данными из localStorage
-      const returnRaskListData = returnAnObjectWithDataFromLocalStorage();
-      setTaskListData(returnRaskListData);
-      console.log(returnRaskListData, 'sasas');
-    } else if (checkLocalStorageForNull() === null) {
-      console.log('777');
+    if (taskListData === null) {
+      console.log('localStorage-ПУСТ!!!', taskListData);
+    } else if (taskListData !== null) {
+      console.log('localStorage-НЕ ПУСТ!!!', taskListData);
     }
   }, []);
 
-  // //функция, обработать изменение текстовой области
-  // const handleTextareaMessageChange = (event) => {
-  //   // setTextareaMessage(event.target.value);
-  //   dispatch(setTextareaMessage(event.target.value));
+  // функция, обработать изменение флажка
+  // const handleCheckboxChange = (id) => {
+  //   const newTaskListData = taskListData.map((item) => {
+  //     if (item.id === id) {
+  //       return {
+  //         ...item,
+  //         tick: !item.tick,
+  //       };
+  //     }
+  //     return item;
+  //   });
+  //   // обновляем данные списка задач
+  //   dispatch(setTaskListData(newTaskListData));
   // };
 
-  // функция, обработать изменение флажка
-  const handleCheckboxChange = (id) => {
-    const newTaskListData = taskListData.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          tick: !item.tick,
-        };
-      }
-      return item;
-    });
-    setTaskListData(newTaskListData);
-  };
-
-  // функция, удалить задачу
-  const removeTask = (id) => {
-    // копируем список задач с помощью оператора spread
-    const copyTaskListData = [...taskListData];
-    // удаляем задачу из списка
-    const newTaskListData = copyTaskListData.filter((item) => item.id !== id);
-    // обновляем данные списка задач
-    setTaskListData(newTaskListData);
-  };
+  // // функция, обработать удаление задачи
+  // const handleTaskRemove = (id) => {
+  //   // копируем список задач с помощью оператора spread
+  //   const copyTaskListData = [...taskListData];
+  //   // удаляем задачу из списка
+  //   const newTaskListData = copyTaskListData.filter((item) => item.id !== id);
+  //   // обновляем данные списка задач
+  //   dispatch(setTaskListData(newTaskListData));
+  //   // записываем данные в localStorage
+  //   writeToLocalStorage(newTaskListData);
+  // };
 
   // функция, добавить задачу в список задач
   const addTaskToTheList = () => {
@@ -85,11 +84,11 @@ function HomePage() {
     });
 
     if (
-      checkLocalStorageForNull() === null &&
+      taskListData === null &&
       checkLengthOfTheString(textareaMessage) === true
     ) {
       // создаем пустой массив
-      const taskListData = [];
+      const newTaskListData = [];
       // формируем объект с данными
       const objTaskData = {
         id: generateId(),
@@ -99,18 +98,18 @@ function HomePage() {
         editing: false,
         sign: 'x',
       };
-      // обновляем состояние
-      setTaskListData(taskListData);
+      // обновляем данные списка задач
+      dispatch(setTaskListData([objTaskData]));
       // записываем данные в localStorage
-      writeToLocalStorage(taskListData, objTaskData);
-      // очищаем поле textarea
+      writeToLocalStorage(newTaskListData, objTaskData);
+      // обновляем(очищаем) поле textarea
       dispatch(setTextareaMessage(''));
-    } else if (
-      checkLocalStorageForNull() !== null &&
+    }
+
+    if (
+      taskListData !== null &&
       checkLengthOfTheString(textareaMessage) === true
     ) {
-      // возвращаем объект с данными из localStorage
-      const taskListData = returnAnObjectWithDataFromLocalStorage();
       // копируем список задач с помощью оператора spread
       const copyTaskListData = [...taskListData];
       // формируем объект с данными
@@ -122,11 +121,11 @@ function HomePage() {
         editing: false,
         sign: 'x',
       };
-      // обновляем состояние
-      setTaskListData([...copyTaskListData, objTaskData]);
+      // обновляем данные списка задач (чтобы новый объект был вначале)
+      dispatch(setTaskListData([objTaskData, ...copyTaskListData]));
       // записываем данные в localStorage
       writeToLocalStorage(copyTaskListData, objTaskData);
-      // очищаем поле textarea
+      // обновляем(очищаем) поле textarea
       dispatch(setTextareaMessage(''));
     }
   };
@@ -165,8 +164,6 @@ function HomePage() {
                       calendarDate={item.date}
                       sign={item.sign}
                       checking={item.tick}
-                      handleCheckboxChange={handleCheckboxChange}
-                      removeTask={removeTask}
                     />
                   );
                 })}

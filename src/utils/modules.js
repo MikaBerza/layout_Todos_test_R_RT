@@ -10,6 +10,12 @@ export const checkLengthOfTheString = (str) => {
   return false;
 };
 
+// функция, возвращает объект с данными из localStorage
+export const returnAnObjectWithDataFromLocalStorage = () => {
+  const dataFromLocalStorage = window.localStorage.getItem('keyTaskDataset');
+  return JSON.parse(dataFromLocalStorage);
+};
+
 // функция, проверяет данные из localStorage на null (отсутствие значения)
 export const checkLocalStorageForNull = () => {
   const dataFromLocalStorage = window.localStorage.getItem('keyTaskDataset');
@@ -17,17 +23,18 @@ export const checkLocalStorageForNull = () => {
   if (dataFromLocalStorage === null) {
     return null;
   }
-  return true;
+
+  return returnAnObjectWithDataFromLocalStorage();
 };
 
 // функция, записывает данные в localStorage
-export const writeToLocalStorage = (dataset, objEnteredData) => {
-  dataset.unshift(objEnteredData);
-  window.localStorage.setItem('keyTaskDataset', JSON.stringify(dataset));
-};
+export const writeToLocalStorage = (dataset, objEnteredData = null) => {
+  if (objEnteredData === null) {
+    window.localStorage.setItem('keyTaskDataset', JSON.stringify(dataset));
+  }
 
-// функция, возвращает объект с данными из localStorage
-export const returnAnObjectWithDataFromLocalStorage = () => {
-  const dataFromLocalStorage = window.localStorage.getItem('keyTaskDataset');
-  return JSON.parse(dataFromLocalStorage);
+  if (objEnteredData !== null) {
+    dataset.unshift(objEnteredData);
+    window.localStorage.setItem('keyTaskDataset', JSON.stringify(dataset));
+  }
 };
