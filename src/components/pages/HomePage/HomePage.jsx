@@ -1,19 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setTaskListData } from '../../../redux/slices/taskListDataSlice.js';
-import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
-
-import {
-  generateId,
-  checkLengthOfTheString,
-  writeToLocalStorage,
-} from '../../../utils/modules.js';
+import { useSelector } from 'react-redux';
 
 import Search from '../../commons/searches/Search';
 import Indicator from '../../commons/indicators/Indicator';
 import Filtering from '../../commons/filtering/Filtering';
 import Textarea from '../../commons/textareas/Textarea';
-import Button from '../../commons/buttons/Button';
+import ButtonGroup from '../../group/buttonGroup/ButtonGroup.jsx';
 import Task from '../../commons/task/Task';
 
 import style from './homePage.module.css';
@@ -25,17 +17,6 @@ const HomePage = () => {
      с помощью селектора taskListDataSlice 
   */
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
-  const { textareaMessage } = useSelector(
-    (state) => state.textareaMessageSlice
-  );
-  /*
-  useDispatch - это хук библиотеки Redux, используем его
-  для получения функции dispatch из Redux store. 
-  Функция dispatch принимает действие(action) в качестве аргумента
-  и передает его в редюсеры для обновления состояния приложения.
-  Вызов функции dispatch позволяет инициировать изменения состояния Redux.
-  */
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (taskListData === null) {
@@ -43,66 +24,8 @@ const HomePage = () => {
     } else if (taskListData !== null) {
       console.log('localStorage-НЕ ПУСТ!!!', taskListData);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // функция, добавить задачу в список задач
-  const addTaskToTheList = () => {
-    // формируем объект с датой
-    const recordingDate = new Date(Date.now()).toLocaleDateString('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-    });
-
-    if (
-      taskListData === null &&
-      checkLengthOfTheString(textareaMessage) === true
-    ) {
-      // создаем пустой массив
-      const newTaskListData = [];
-      // формируем объект с данными
-      const objTaskData = {
-        id: generateId(),
-        note: textareaMessage,
-        date: recordingDate,
-        tick: false,
-        editing: false,
-        sign: 'x',
-      };
-      // обновляем данные списка задач
-      dispatch(setTaskListData([objTaskData]));
-      // записываем данные в localStorage
-      writeToLocalStorage(newTaskListData, objTaskData);
-      // обновляем(очищаем) поле textarea
-      dispatch(setTextareaMessage(''));
-    }
-
-    if (
-      taskListData !== null &&
-      checkLengthOfTheString(textareaMessage) === true
-    ) {
-      // копируем список задач с помощью оператора spread
-      const copyTaskListData = [...taskListData];
-      // формируем объект с данными
-      const objTaskData = {
-        id: generateId(),
-        note: textareaMessage,
-        date: recordingDate,
-        tick: false,
-        editing: false,
-        sign: 'x',
-      };
-      // обновляем данные списка задач (чтобы новый объект был вначале)
-      dispatch(setTaskListData([objTaskData, ...copyTaskListData]));
-      // записываем данные в localStorage
-      writeToLocalStorage(copyTaskListData, objTaskData);
-      // обновляем(очищаем) поле textarea
-      dispatch(setTextareaMessage(''));
-    }
-  };
 
   return (
     <>
@@ -118,11 +41,7 @@ const HomePage = () => {
 
         <section className={style.enteringTask}>
           <Textarea placeholders={'Что нужно сделать?'} />
-          <div className={style.buttons}>
-            <Button name={'Выбрать всё'} />
-            <Button name={'Удалить'} />
-            <Button name={'Добавить'} addTaskToTheList={addTaskToTheList} />
-          </div>
+          <ButtonGroup />
         </section>
 
         <section className={style.outputTask}>

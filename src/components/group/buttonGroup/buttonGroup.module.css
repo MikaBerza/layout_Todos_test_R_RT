@@ -1,0 +1,11 @@
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+  .buttons> :nth-child(2) {
+    width: 33%;
+  }
+}

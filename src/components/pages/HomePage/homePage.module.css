@@ -28,12 +28,6 @@
   padding: 0px 10px;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
 .listTask {
   overflow: auto;
   min-height: 0px;
@@ -108,7 +102,4 @@
     padding: 0px;
   }
 
-  .buttons> :nth-child(2) {
-    width: 33%;
-  }
 }
