@@ -45,33 +45,6 @@ function HomePage() {
     }
   }, []);
 
-  // функция, обработать изменение флажка
-  // const handleCheckboxChange = (id) => {
-  //   const newTaskListData = taskListData.map((item) => {
-  //     if (item.id === id) {
-  //       return {
-  //         ...item,
-  //         tick: !item.tick,
-  //       };
-  //     }
-  //     return item;
-  //   });
-  //   // обновляем данные списка задач
-  //   dispatch(setTaskListData(newTaskListData));
-  // };
-
-  // // функция, обработать удаление задачи
-  // const handleTaskRemove = (id) => {
-  //   // копируем список задач с помощью оператора spread
-  //   const copyTaskListData = [...taskListData];
-  //   // удаляем задачу из списка
-  //   const newTaskListData = copyTaskListData.filter((item) => item.id !== id);
-  //   // обновляем данные списка задач
-  //   dispatch(setTaskListData(newTaskListData));
-  //   // записываем данные в localStorage
-  //   writeToLocalStorage(newTaskListData);
-  // };
-
   // функция, добавить задачу в список задач
   const addTaskToTheList = () => {
     // формируем объект с датой
