@@ -30,7 +30,15 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
   const dispatch = useDispatch();
 
   // функция, обработать редактирование задачи
-  const handleTaskEditing = (id) => {
+  const handleTaskEditing = (event, id) => {
+    /*
+    добавил проверку, является ли event.target элементом input,
+    если да, то прекращаем выполнение функции. Проверка нужна,
+    чтобы избежать перехода в режим редактирования при двойном клике по input.
+    */
+    if (event.target.tagName.toLowerCase() === 'input') {
+      return;
+    }
     const newTaskListData = taskListData.map((item) => {
       if (item.id === id && item.tick !== true) {
         // обновляем(устанавливаем) в поле textarea
@@ -83,7 +91,10 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
   return (
     <>
       {showTasks === true ? (
-        <li className={style.item} onDoubleClick={() => handleTaskEditing(id)}>
+        <li
+          className={style.item}
+          onDoubleClick={(event) => handleTaskEditing(event, id)}
+        >
           <div className={style.inner1}>
             <span
               className={`${checking ? style.completed : ''} ${style.text}`}
