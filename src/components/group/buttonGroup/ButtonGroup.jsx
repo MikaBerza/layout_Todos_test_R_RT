@@ -1,23 +1,19 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setTaskListData,
   setShowTasks,
 } from '../../../redux/slices/taskListDataSlice.js';
 import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
-import {
-  // setRemoveButton,
-  setEditButton,
-} from '../../../redux/slices/buttonGroupSlice.js';
+import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
 import {
   generateId,
   checkLengthOfTheString,
   writeToLocalStorage,
 } from '../../../utils/modules.js';
-
 import Button from '../../commons/buttons/Button.jsx';
-
 import style from './buttonGroup.module.css';
 
 const ButtonGroup = () => {
@@ -62,7 +58,7 @@ const ButtonGroup = () => {
       // формируем объект с данными
       const objTaskData = {
         id: generateId(),
-        note: textareaMessage,
+        note: textareaMessage.trim(),
         date: recordingDate,
         tick: false,
         editing: false,
@@ -85,7 +81,7 @@ const ButtonGroup = () => {
       // формируем объект с данными
       const objTaskData = {
         id: generateId(),
-        note: textareaMessage,
+        note: textareaMessage.trim(),
         date: recordingDate,
         tick: false,
         editing: false,
@@ -100,11 +96,10 @@ const ButtonGroup = () => {
     }
   };
 
-  // функция, добавить редактируемую задачу в список задач
-  const addEditableTaskToTheList = () => {
-    const updatedTaskList = taskListData.map((item) => {
+  // функция, заменить задачу в списке задач при редактировании
+  const replaceTaskToTheListWhenEditing = () => {
+    const newTaskListData = taskListData.map((item) => {
       if (item.editing === true && textareaMessage.length !== 0) {
-        console.log('Выход из режим редактирования_1');
         // обновляем(очищаем) поле textarea
         dispatch(setTextareaMessage(''));
         // скрываем кнопку (редактировать) изменим ее состояние на (false), показываем остальные кнопки
@@ -121,24 +116,59 @@ const ButtonGroup = () => {
       return item;
     });
     // обновляем данные списка задач
-    dispatch(setTaskListData(updatedTaskList));
+    dispatch(setTaskListData(newTaskListData));
     // записываем данные в localStorage
-    writeToLocalStorage(updatedTaskList);
-    console.log('Выход из режим редактирования_2');
+    writeToLocalStorage(newTaskListData);
+  };
+
+  // функция, установить или снять все флажки
+  const checkOrClearAllCheckboxes = () => {
+    if (taskListData !== null) {
+      // копируем список задач с помощью оператора spread
+      const copyTaskListData = [...taskListData];
+      const newTaskListData = [];
+      let counterTrue = 0;
+
+      copyTaskListData.forEach((item) => {
+        if (item.tick === true) {
+          counterTrue += 1;
+        }
+      });
+
+      if (counterTrue === copyTaskListData.length) {
+        copyTaskListData.forEach((item) => {
+          const newItem = { ...item, tick: false };
+          newTaskListData.push(newItem);
+        });
+      }
+      if (counterTrue !== copyTaskListData.length) {
+        copyTaskListData.forEach((item) => {
+          const newItem = { ...item, tick: true };
+          newTaskListData.push(newItem);
+        });
+      }
+      // обновляем данные списка задач
+      dispatch(setTaskListData(newTaskListData));
+      // записываем данные в localStorage
+      writeToLocalStorage(newTaskListData);
+    }
   };
 
   return (
     <div className={style.buttons}>
       {editButton === false ? (
         <>
-          <Button name={'Выбрать всё'} />
+          <Button
+            name={'Выбрать всё'}
+            handleButtonClick={checkOrClearAllCheckboxes}
+          />
           {removeButton === false ? '' : <Button name={'Удалить'} />}
           <Button name={'Добавить'} handleButtonClick={addTaskToTheList} />
         </>
       ) : (
         <Button
           name={'Редактировать'}
-          handleButtonClick={addEditableTaskToTheList}
+          handleButtonClick={replaceTaskToTheListWhenEditing}
         />
       )}
     </div>

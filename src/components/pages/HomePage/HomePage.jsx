@@ -23,23 +23,24 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log(taskListData, 'taskListData');
     // если во время редактирования задачи, страница перезагрузиться,
     // данные с ключом editing(состояние редактирования) перезапишутся
     return () => {
-      const updatedTaskList = taskListData.map((item) => {
-        if (item.editing === true) {
-          // изменяем состояние поля с ключом (editing), с (true) на (false)
-          const newItem = { ...item, editing: false };
-          return newItem;
-        }
-        // возвращаем элемент массива без изменений если он не соответствует условию
-        return item;
-      });
-      // обновляем данные списка задач
-      dispatch(setTaskListData(updatedTaskList));
-      // обновляем данные в localStorage
-      writeToLocalStorage(updatedTaskList);
+      if (taskListData !== null) {
+        const newTaskListData = taskListData.map((item) => {
+          if (item.editing === true) {
+            // изменяем состояние поля с ключом (editing), с (true) на (false)
+            const newItem = { ...item, editing: false };
+            return newItem;
+          }
+          // возвращаем элемент массива без изменений если он не соответствует условию
+          return item;
+        });
+        // обновляем данные списка задач
+        dispatch(setTaskListData(newTaskListData));
+        // обновляем данные в localStorage
+        writeToLocalStorage(newTaskListData);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

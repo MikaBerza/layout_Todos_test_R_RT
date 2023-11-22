@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setTaskListData,
@@ -8,7 +9,6 @@ import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.j
 import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
 import { writeToLocalStorage } from '../../../utils/modules.js';
-
 import style from './task.module.css';
 
 const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
@@ -31,9 +31,8 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
 
   // функция, обработать редактирование задачи
   const handleTaskEditing = (id) => {
-    const updatedTaskList = taskListData.map((item) => {
+    const newTaskListData = taskListData.map((item) => {
       if (item.id === id && item.tick !== true) {
-        console.log('Переход в режим редактирования_1');
         // обновляем(устанавливаем) в поле textarea
         dispatch(setTextareaMessage(item.note));
         // показываем кнопку (редактировать) изменим ее состояние на (true), скрываем остальные кнопки
@@ -49,20 +48,17 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
       return item;
     });
     // обновляем данные списка задач
-    dispatch(setTaskListData(updatedTaskList));
+    dispatch(setTaskListData(newTaskListData));
     // обновляем данные в localStorage
-    writeToLocalStorage(updatedTaskList);
-    console.log('Переход в режим редактирования_2');
+    writeToLocalStorage(newTaskListData);
   };
 
   // функция, обработать изменение флажка
   const handleCheckboxChange = (id) => {
     const newTaskListData = taskListData.map((item) => {
       if (item.id === id) {
-        return {
-          ...item,
-          tick: !item.tick,
-        };
+        const newItem = { ...item, tick: !item.tick };
+        return newItem;
       }
       return item;
     });
@@ -97,8 +93,8 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
             <input
               className={style.checkbox}
               type='checkbox'
-              defaultChecked={checking}
-              onClick={() => handleCheckboxChange(id)}
+              checked={checking}
+              onChange={() => handleCheckboxChange(id)}
             />
           </div>
           <div className={style.inner2}>
