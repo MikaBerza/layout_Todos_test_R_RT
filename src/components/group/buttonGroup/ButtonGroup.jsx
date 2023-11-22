@@ -26,9 +26,7 @@ const ButtonGroup = () => {
   const { textareaMessage } = useSelector(
     (state) => state.textareaMessageSlice
   );
-  const { removeButton, editButton } = useSelector(
-    (state) => state.buttonGroupSlice
-  );
+  const { editButton } = useSelector((state) => state.buttonGroupSlice);
   /*
      useDispatch - это хук библиотеки Redux, используем его
      для получения функции dispatch из Redux store. 
@@ -154,6 +152,33 @@ const ButtonGroup = () => {
     }
   };
 
+  // функция, проверить наличие установленных флажков
+  const checkForCheckboxes = () => {
+    if (taskListData !== null) {
+      const result = taskListData.find((item) => {
+        return item.tick === true;
+      });
+
+      return result !== undefined ? true : false;
+    }
+  };
+
+  // функция, удалить задачи с флажками
+  const removeTasksWithCheckboxes = () => {
+    if (taskListData !== null) {
+      // копируем список задач с помощью оператора spread
+      const copyTaskListData = [...taskListData];
+      // удаляем задачу из списка
+      const newTaskListData = copyTaskListData.filter(
+        (item) => item.tick !== true
+      );
+      // обновляем данные списка задач
+      dispatch(setTaskListData(newTaskListData));
+      // записываем данные в localStorage
+      writeToLocalStorage(newTaskListData);
+    }
+  };
+
   return (
     <div className={style.buttons}>
       {editButton === false ? (
@@ -162,7 +187,14 @@ const ButtonGroup = () => {
             name={'Выбрать всё'}
             handleButtonClick={checkOrClearAllCheckboxes}
           />
-          {removeButton === false ? '' : <Button name={'Удалить'} />}
+          {checkForCheckboxes() === false ? (
+            ''
+          ) : (
+            <Button
+              name={'Удалить'}
+              handleButtonClick={removeTasksWithCheckboxes}
+            />
+          )}
           <Button name={'Добавить'} handleButtonClick={addTaskToTheList} />
         </>
       ) : (
