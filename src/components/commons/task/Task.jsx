@@ -29,8 +29,8 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
   */
   const dispatch = useDispatch();
 
-  // функция, обработать редактирование задачи
-  const handleTaskEditing = (event, id) => {
+  // функция, обработать вход в режим редактирования задачи
+  const handleEntryIntoTaskEditingMode = (event, id) => {
     /*
     добавил проверку, является ли event.target элементом input,
     если да, то прекращаем выполнение функции. Проверка нужна,
@@ -93,7 +93,7 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
       {showTasks === true ? (
         <li
           className={style.item}
-          onDoubleClick={(event) => handleTaskEditing(event, id)}
+          onDoubleClick={(event) => handleEntryIntoTaskEditingMode(event, id)}
         >
           <div className={style.inner1}>
             <span

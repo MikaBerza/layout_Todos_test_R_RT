@@ -9,10 +9,11 @@ import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.j
 import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
 import {
-  generateId,
-  checkLengthOfTheString,
   writeToLocalStorage,
+  addTaskToTheList,
+  replaceTaskToTheListWhenEditing,
 } from '../../../utils/modules.js';
+
 import Button from '../../commons/buttons/Button.jsx';
 import style from './buttonGroup.module.css';
 
@@ -36,87 +37,66 @@ const ButtonGroup = () => {
      */
   const dispatch = useDispatch();
 
-  // функция, добавить задачу в список задач
-  const addTaskToTheList = () => {
-    // формируем объект с датой
-    const recordingDate = new Date(Date.now()).toLocaleDateString('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-    });
+  // функция, обработать добавление задачи с помощью кнопки 'Добавить'
+  const handleAddTaskByAddButton = () => {
+    // запишем в константу результат выполнения функции
+    const executionResults = addTaskToTheList(taskListData, textareaMessage);
 
-    if (
-      taskListData === null &&
-      checkLengthOfTheString(textareaMessage) === true
-    ) {
-      // создаем пустой массив
-      const newTaskListData = [];
-      // формируем объект с данными
-      const objTaskData = {
-        id: generateId(),
-        note: textareaMessage.trim(),
-        date: recordingDate,
-        tick: false,
-        editing: false,
-        sign: 'x',
-      };
-      // обновляем данные списка задач
-      dispatch(setTaskListData([objTaskData]));
-      // записываем данные в localStorage
-      writeToLocalStorage(newTaskListData, objTaskData);
-      // обновляем(очищаем) поле textarea
-      dispatch(setTextareaMessage(''));
-    }
+    if (executionResults !== null) {
+      // запишем в константу статус выполнения функции
+      const executionStatus = executionResults[0];
 
-    if (
-      taskListData !== null &&
-      checkLengthOfTheString(textareaMessage) === true
-    ) {
-      // копируем список задач с помощью оператора spread
-      const copyTaskListData = [...taskListData];
-      // формируем объект с данными
-      const objTaskData = {
-        id: generateId(),
-        note: textareaMessage.trim(),
-        date: recordingDate,
-        tick: false,
-        editing: false,
-        sign: 'x',
-      };
-      // обновляем данные списка задач (чтобы новый объект был вначале)
-      dispatch(setTaskListData([objTaskData, ...copyTaskListData]));
-      // записываем данные в localStorage
-      writeToLocalStorage(copyTaskListData, objTaskData);
-      // обновляем(очищаем) поле textarea
-      dispatch(setTextareaMessage(''));
+      // если задача записывается _ПЕРВЫЙ_ раз
+      if (executionStatus === 'first task') {
+        // запишем в константу возвращенный объект с данными задачи
+        const objectWithTaskData = executionResults[1];
+        // запишем в константу возвращенный массив данных списка задач
+        const arrayOfTaskListData = executionResults[2];
+
+        // обновляем данные списка задач
+        dispatch(setTaskListData([objectWithTaskData]));
+        // записываем данные в localStorage
+        writeToLocalStorage(arrayOfTaskListData, objectWithTaskData);
+        // обновляем(очищаем) поле textarea
+        dispatch(setTextareaMessage(''));
+        console.log('_ПЕРВЫЙ_ раз');
+      }
+
+      // если задача записывается _ОЧЕРЕДНОЙ_ раз
+      if (executionStatus === 'next task') {
+        // запишем в константу возвращенный объект с данными задачи
+        const objectWithTaskData = executionResults[1];
+        // запишем в константу возвращенный массив данных списка задач
+        const arrayOfTaskListData = executionResults[2];
+
+        // обновляем данные списка задач (чтобы новый объект был вначале)
+        dispatch(setTaskListData([objectWithTaskData, ...arrayOfTaskListData]));
+        // записываем данные в localStorage
+        writeToLocalStorage(arrayOfTaskListData, objectWithTaskData);
+        // обновляем(очищаем) поле textarea
+        dispatch(setTextareaMessage(''));
+      }
     }
   };
 
-  // функция, заменить задачу в списке задач при редактировании
-  const replaceTaskToTheListWhenEditing = () => {
-    const newTaskListData = taskListData.map((item) => {
-      if (item.editing === true && textareaMessage.length !== 0) {
-        // обновляем(очищаем) поле textarea
-        dispatch(setTextareaMessage(''));
-        // скрываем кнопку (редактировать) изменим ее состояние на (false), показываем остальные кнопки
-        dispatch(setEditButton(false));
-        // показываем все задачи, обновляя состояние
-        dispatch(setShowTasks(true));
+  // функция, обработать замену задачи с помощью кнопки 'Редактировать'
+  const handleAddTaskByReplaceButton = () => {
+    // запишем в константу возвращенный массив данных списка задач
+    const arrayOfTaskListData = replaceTaskToTheListWhenEditing(
+      taskListData,
+      textareaMessage
+    );
 
-        // изменяем значение поля с записью (note), на то которое в textarea
-        // изменяем состояние поля с ключом (editing), с (true) на (false)
-        const newItem = { ...item, note: textareaMessage, editing: false };
-        return newItem;
-      }
-      // возвращаем элемент массива без изменений если он не соответствует условию
-      return item;
-    });
     // обновляем данные списка задач
-    dispatch(setTaskListData(newTaskListData));
+    dispatch(setTaskListData(arrayOfTaskListData));
     // записываем данные в localStorage
-    writeToLocalStorage(newTaskListData);
+    writeToLocalStorage(arrayOfTaskListData);
+    // обновляем(очищаем) поле textarea
+    dispatch(setTextareaMessage(''));
+    // скрываем кнопку (редактировать)
+    dispatch(setEditButton(false));
+    // показываем все задачи
+    dispatch(setShowTasks(true));
   };
 
   // функция, установить или снять все флажки
@@ -195,12 +175,15 @@ const ButtonGroup = () => {
               handleButtonClick={removeTasksWithCheckboxes}
             />
           )}
-          <Button name={'Добавить'} handleButtonClick={addTaskToTheList} />
+          <Button
+            name={'Добавить'}
+            handleButtonClick={handleAddTaskByAddButton}
+          />
         </>
       ) : (
         <Button
           name={'Редактировать'}
-          handleButtonClick={replaceTaskToTheListWhenEditing}
+          handleButtonClick={handleAddTaskByReplaceButton}
         />
       )}
     </div>
