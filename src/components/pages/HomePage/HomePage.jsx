@@ -124,15 +124,47 @@ const HomePage = () => {
     }
   };
 
+  // функция, обработать выход из режима редактирования
+  // с помощью клавиши 'Escape' (выходим из режима "РЕДАКТИРОВАНИЯ")
+  const handleExitingTheTaskEditingMode = (event) => {
+    if (event.key === 'Escape') {
+      const arrayOfTaskListData = taskListData.map((item) => {
+        if (item.editing === true) {
+          // изменяем состояние поля с ключом (editing), с (true) на (false)
+          const newItem = { ...item, editing: false };
+          return newItem;
+        }
+        // возвращаем элемент массива без изменений если он не соответствует условию
+        return item;
+      });
+      // обновляем данные списка задач
+      dispatch(setTaskListData(arrayOfTaskListData));
+      // записываем данные в localStorage
+      writeToLocalStorage(arrayOfTaskListData);
+      // обновляем(очищаем) поле textarea
+      dispatch(setTextareaMessage(''));
+      // отменяем действие по умолчанию,
+      // курсор в поле textarea возвращается в исходное положение, а не висит в ожидании ввода текста
+      event.preventDefault();
+      // скрываем кнопку (редактировать)
+      dispatch(setEditButton(false));
+      // показываем все задачи
+      dispatch(setShowTasks(true));
+    }
+  };
+
   return (
     <>
       <main
         className={style.content}
-        onKeyDown={
-          editButton === false
-            ? (event) => handleAddTaskByEnterKeystroke(event)
-            : (event) => handleReplaceTaskByEnterKeystroke(event)
-        }
+        onKeyDown={(event) => {
+          if (editButton === false) {
+            handleAddTaskByEnterKeystroke(event);
+          } else {
+            handleReplaceTaskByEnterKeystroke(event);
+            handleExitingTheTaskEditingMode(event);
+          }
+        }}
         tabIndex={0}
       >
         <section className={style.control}>
