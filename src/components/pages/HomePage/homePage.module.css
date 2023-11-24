@@ -28,43 +28,6 @@
   padding: 0px 10px;
 }
 
-.listTask {
-  overflow: auto;
-  min-height: 0px;
-  max-height: 320px;
-  margin: 0;
-  padding: 0;
-  border-radius: 10px;
-}
-
-.listTask::-webkit-scrollbar {
-  width: 12px;
-}
-
-.listTask::-webkit-scrollbar-track {
-  background-color: var(--lightGrey2-color);
-  border: 1px solid var(--lightGrey2-color);
-  border-radius: 8px;
-}
-
-.listTask::-webkit-scrollbar-thumb {
-  background-color: var(--lightGrey-color);
-  border: 1px solid var(--lightGrey-color);
-  border-radius: 8px;
-}
-
-.listTask::-webkit-scrollbar-thumb:hover {
-  background-color: var(--mapleGreen-color);
-  border: 1px solid var(--mapleGreen-color);
-  cursor: pointer;
-}
-
-.listTask::-webkit-scrollbar-thumb:active {
-  background-color: var(--emeraldGreen-color);
-  border: 1px solid var(--emeraldGreen-color);
-}
-
-
 @media (max-width: 1023px) {
   .content {
     font-size: 16px;
@@ -84,10 +47,6 @@
 
   .outputTask {
     margin-top: 10px;
-  }
-
-  .listTask {
-    max-height: 250px;
   }
 }
 

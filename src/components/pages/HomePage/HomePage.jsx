@@ -13,7 +13,7 @@ import Indicator from '../../commons/indicators/Indicator';
 import Filtering from '../../commons/filtering/Filtering';
 import Textarea from '../../commons/textareas/Textarea';
 import ButtonGroup from '../../group/buttonGroup/ButtonGroup.jsx';
-import Task from '../../commons/task/Task';
+import ListTask from '../../group/listTaskGroup/ListTask.jsx';
 
 import {
   writeToLocalStorage,
@@ -36,7 +36,6 @@ const HomePage = () => {
     (state) => state.textareaMessageSlice
   );
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
-  const { filteringValue } = useSelector((state) => state.filteringSlice);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -187,33 +186,7 @@ const HomePage = () => {
         </section>
 
         <section className={style.outputTask}>
-          {showTasks === true ? (
-            <ul className={style.listTask}>
-              {taskListData === null
-                ? ''
-                : taskListData.map((objectWithTaskData) => {
-                    return (
-                      <>
-                        {/* Условие, для фильтрация задач */}
-                        {filteringValue === 'все' ||
-                        (filteringValue === 'завершенные' &&
-                          objectWithTaskData.tick === true) ||
-                        (filteringValue === 'активные' &&
-                          objectWithTaskData.tick === false) ? (
-                          <Task
-                            key={objectWithTaskData.id}
-                            {...objectWithTaskData}
-                          />
-                        ) : (
-                          ''
-                        )}
-                      </>
-                    );
-                  })}
-            </ul>
-          ) : (
-            ''
-          )}
+          {showTasks === true ? <ListTask /> : ''}
         </section>
       </main>
     </>
