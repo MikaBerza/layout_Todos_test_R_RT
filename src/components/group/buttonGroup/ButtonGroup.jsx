@@ -59,7 +59,6 @@ const ButtonGroup = () => {
         writeToLocalStorage(arrayOfTaskListData, objectWithTaskData);
         // обновляем(очищаем) поле textarea
         dispatch(setTextareaMessage(''));
-        console.log('_ПЕРВЫЙ_ раз');
       }
 
       // если задача записывается _ОЧЕРЕДНОЙ_ раз
@@ -138,9 +137,9 @@ const ButtonGroup = () => {
       const result = taskListData.find((item) => {
         return item.tick === true;
       });
-
       return result !== undefined ? true : false;
     }
+    return false;
   };
 
   // функция, удалить задачи с флажками

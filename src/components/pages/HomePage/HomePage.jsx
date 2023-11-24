@@ -68,14 +68,13 @@ const HomePage = () => {
     if (executionResults !== null && event.key === 'Enter') {
       // запишем в константу статус выполнения функции
       const executionStatus = executionResults[0];
+      // запишем в константу возвращенный объект с данными задачи
+      const objectWithTaskData = executionResults[1];
+      // запишем в константу возвращенный массив данных списка задач
+      const arrayOfTaskListData = executionResults[2];
 
       // если задача записывается _ПЕРВЫЙ_ раз
       if (executionStatus === 'first task') {
-        // запишем в константу возвращенный объект с данными задачи
-        const objectWithTaskData = executionResults[1];
-        // запишем в константу возвращенный массив данных списка задач
-        const arrayOfTaskListData = executionResults[2];
-
         // обновляем данные списка задач
         dispatch(setTaskListData([objectWithTaskData]));
         // записываем данные в localStorage
@@ -86,11 +85,6 @@ const HomePage = () => {
 
       // если задача записывается _ОЧЕРЕДНОЙ_ раз
       if (executionStatus === 'next task') {
-        // запишем в константу возвращенный объект с данными задачи
-        const objectWithTaskData = executionResults[1];
-        // запишем в константу возвращенный массив данных списка задач
-        const arrayOfTaskListData = executionResults[2];
-
         // обновляем данные списка задач (чтобы новый объект был вначале)
         dispatch(setTaskListData([objectWithTaskData, ...arrayOfTaskListData]));
         // записываем данные в localStorage
@@ -98,6 +92,9 @@ const HomePage = () => {
         // обновляем(очищаем) поле textarea
         dispatch(setTextareaMessage(''));
       }
+      // отменяем действие по умолчанию,
+      // курсор в поле textarea возвращается в исходное положение, а не висит в ожидании ввода текста
+      event.preventDefault();
     }
   };
 
@@ -117,6 +114,9 @@ const HomePage = () => {
       writeToLocalStorage(arrayOfTaskListData);
       // обновляем(очищаем) поле textarea
       dispatch(setTextareaMessage(''));
+      // отменяем действие по умолчанию,
+      // курсор в поле textarea возвращается в исходное положение, а не висит в ожидании ввода текста
+      event.preventDefault();
       // скрываем кнопку (редактировать)
       dispatch(setEditButton(false));
       // показываем все задачи
@@ -130,8 +130,8 @@ const HomePage = () => {
         className={style.content}
         onKeyDown={
           editButton === false
-            ? handleAddTaskByEnterKeystroke
-            : handleReplaceTaskByEnterKeystroke
+            ? (event) => handleAddTaskByEnterKeystroke(event)
+            : (event) => handleReplaceTaskByEnterKeystroke(event)
         }
         tabIndex={0}
       >
