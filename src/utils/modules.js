@@ -28,14 +28,23 @@ export const checkLocalStorageForNull = () => {
 };
 
 // функция, записывает данные в localStorage
-export const writeToLocalStorage = (dataset, objEnteredData = null) => {
+export const writeToLocalStorage = (
+  arrayTaskListData,
+  objEnteredData = null
+) => {
   if (objEnteredData === null) {
-    window.localStorage.setItem('keyTaskDataset', JSON.stringify(dataset));
+    window.localStorage.setItem(
+      'keyTaskDataset',
+      JSON.stringify(arrayTaskListData)
+    );
   }
 
   if (objEnteredData !== null) {
-    dataset.unshift(objEnteredData);
-    window.localStorage.setItem('keyTaskDataset', JSON.stringify(dataset));
+    arrayTaskListData.unshift(objEnteredData);
+    window.localStorage.setItem(
+      'keyTaskDataset',
+      JSON.stringify(arrayTaskListData)
+    );
   }
 };
 

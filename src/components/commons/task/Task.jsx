@@ -11,15 +11,15 @@ import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 import { writeToLocalStorage } from '../../../utils/modules.js';
 import style from './task.module.css';
 
-const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
+// запись(date: calendarDate) означает, что значение свойства (date) теперь доступно под именем (calendarDate)
+
+const Task = ({ id, note, date: calendarDate, sign, tick: checking }) => {
   /* 
      используем хук useSelector из библиотеки Redux 
      для получения значений (taskListData) из состояния,
      с помощью селектора taskListDataSlice 
   */
-  const { taskListData, showTasks } = useSelector(
-    (state) => state.taskListDataSlice
-  );
+  const { taskListData } = useSelector((state) => state.taskListDataSlice);
   /*
      useDispatch - это хук библиотеки Redux, используем его
      для получения функции dispatch из Redux store. 
@@ -89,36 +89,28 @@ const Task = ({ id, note, calendarDate, sign, checking, editing }) => {
   };
 
   return (
-    <>
-      {showTasks === true ? (
-        <li
-          className={style.item}
-          onDoubleClick={(event) => handleEntryIntoTaskEditingMode(event, id)}
-        >
-          <div className={style.inner1}>
-            <span
-              className={`${checking ? style.completed : ''} ${style.text}`}
-            >
-              {note}
-            </span>
-            <input
-              className={style.checkbox}
-              type='checkbox'
-              checked={checking}
-              onChange={() => handleCheckboxChange(id)}
-            />
-          </div>
-          <div className={style.inner2}>
-            <span className={style.date}>{calendarDate}</span>
-            <span className={style.remove} onClick={() => handleTaskRemove(id)}>
-              {sign}
-            </span>
-          </div>
-        </li>
-      ) : (
-        ''
-      )}
-    </>
+    <li
+      className={style.item}
+      onDoubleClick={(event) => handleEntryIntoTaskEditingMode(event, id)}
+    >
+      <div className={style.inner1}>
+        <span className={`${checking ? style.completed : ''} ${style.text}`}>
+          {note}
+        </span>
+        <input
+          className={style.checkbox}
+          type='checkbox'
+          checked={checking}
+          onChange={() => handleCheckboxChange(id)}
+        />
+      </div>
+      <div className={style.inner2}>
+        <span className={style.date}>{calendarDate}</span>
+        <span className={style.remove} onClick={() => handleTaskRemove(id)}>
+          {sign}
+        </span>
+      </div>
+    </li>
   );
 };
 

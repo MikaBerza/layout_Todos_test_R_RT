@@ -29,11 +29,14 @@ const HomePage = () => {
      для получения значений (taskListData) из состояния,
      с помощью селектора taskListDataSlice 
   */
-  const { taskListData } = useSelector((state) => state.taskListDataSlice);
+  const { taskListData, showTasks } = useSelector(
+    (state) => state.taskListDataSlice
+  );
   const { textareaMessage } = useSelector(
     (state) => state.textareaMessageSlice
   );
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
+  const { filteringValue } = useSelector((state) => state.filteringSlice);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -165,11 +168,13 @@ const HomePage = () => {
             handleExitingTheTaskEditingMode(event);
           }
         }}
+        // устанавливает фокус на элементе(main),
+        // чтобы можно было воспользоваться (onKeyDown) тогда, когда фокуса нет в поле (textarea)
         tabIndex={0}
       >
         <section className={style.control}>
           <Search placeholders={'🔍 поиск задач'} />
-          <Indicator/>
+          <Indicator />
           <Filtering
             title={'фильтрация'}
             nameOfFilters={['все', 'активные', 'завершенные']}
@@ -182,23 +187,33 @@ const HomePage = () => {
         </section>
 
         <section className={style.outputTask}>
-          <ul className={style.listTask}>
-            {taskListData === null
-              ? ''
-              : taskListData.map((item) => {
-                  return (
-                    <Task
-                      key={item.id}
-                      id={item.id}
-                      note={item.note}
-                      calendarDate={item.date}
-                      sign={item.sign}
-                      checking={item.tick}
-                      editing={item.editing}
-                    />
-                  );
-                })}
-          </ul>
+          {showTasks === true ? (
+            <ul className={style.listTask}>
+              {taskListData === null
+                ? ''
+                : taskListData.map((objectWithTaskData) => {
+                    return (
+                      <>
+                        {/* Условие, для фильтрация задач */}
+                        {filteringValue === 'все' ||
+                        (filteringValue === 'завершенные' &&
+                          objectWithTaskData.tick === true) ||
+                        (filteringValue === 'активные' &&
+                          objectWithTaskData.tick === false) ? (
+                          <Task
+                            key={objectWithTaskData.id}
+                            {...objectWithTaskData}
+                          />
+                        ) : (
+                          ''
+                        )}
+                      </>
+                    );
+                  })}
+            </ul>
+          ) : (
+            ''
+          )}
         </section>
       </main>
     </>
