@@ -169,7 +169,7 @@ const HomePage = () => {
       >
         <section className={style.control}>
           <Search placeholders={'🔍 поиск задач'} />
-          <Indicator nameOfStatuses={['всего', 'активно', 'завершено']} />
+          <Indicator/>
           <Filtering
             title={'фильтрация'}
             nameOfFilters={['все', 'активные', 'завершенные']}
