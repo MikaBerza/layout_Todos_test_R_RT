@@ -16,6 +16,7 @@ import ButtonGroup from '../../group/buttonGroup/ButtonGroup.jsx';
 import ListTask from '../../group/listTaskGroup/ListTask.jsx';
 
 import {
+  arrNameOfFilters,
   writeToLocalStorage,
   addTaskToTheList,
   replaceTaskToTheListWhenEditing,
@@ -159,6 +160,9 @@ const HomePage = () => {
     <>
       <main
         className={style.content}
+        // tabIndex={0} - устанавливает фокус на элементе(main),
+        // чтобы можно было воспользоваться (onKeyDown) тогда, когда фокуса нет в поле (textarea)
+        tabIndex={0}
         onKeyDown={(event) => {
           if (editButton === false) {
             handleAddTaskByEnterKeystroke(event);
@@ -167,17 +171,11 @@ const HomePage = () => {
             handleExitingTheTaskEditingMode(event);
           }
         }}
-        // устанавливает фокус на элементе(main),
-        // чтобы можно было воспользоваться (onKeyDown) тогда, когда фокуса нет в поле (textarea)
-        tabIndex={0}
       >
         <section className={style.control}>
           <Search placeholders={'🔍 поиск задач'} />
           <Indicator />
-          <Filtering
-            title={'фильтрация'}
-            nameOfFilters={['все', 'активные', 'завершенные']}
-          />
+          <Filtering title={'фильтрация'} nameOfFilters={arrNameOfFilters} />
         </section>
 
         <section className={style.enteringTask}>
@@ -185,9 +183,11 @@ const HomePage = () => {
           <ButtonGroup />
         </section>
 
-        <section className={style.outputTask}>
-          {showTasks === true ? <ListTask /> : ''}
-        </section>
+        {showTasks && (
+          <section className={style.outputTask}>
+            <ListTask nameOfFilters={arrNameOfFilters} />
+          </section>
+        )}
       </main>
     </>
   );

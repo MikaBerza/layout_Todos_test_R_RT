@@ -1,32 +1,38 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Task from '../../commons/task/Task';
+import Task from '../../commons/task/Task.jsx';
+
 import style from './listTask.module.css';
 
-const ListTask = () => {
+const ListTask = ({ nameOfFilters }) => {
+  // присвоим значения массива, в переменные all, active, completed
+  const [all, active, completed] = nameOfFilters;
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
   const { filteringValue } = useSelector((state) => state.filteringSlice);
 
+  // если условие выполняется, то дальше по коду не идем, вернет null
+  if (taskListData === null) {
+    return null;
+  }
+
   return (
     <ul className={style.item}>
-      {taskListData === null
-        ? ''
-        : taskListData.map((objectWithTaskData) => {
-            return (
-              <>
-                {/* условие, для фильтрация(отображения) задач */}
-                {filteringValue === 'все' ||
-                (filteringValue === 'завершенные' &&
-                  objectWithTaskData.tick === true) ||
-                (filteringValue === 'активные' &&
-                  objectWithTaskData.tick === false) ? (
-                  <Task key={objectWithTaskData.id} {...objectWithTaskData} />
-                ) : (
-                  ''
-                )}
-              </>
-            );
-          })}
+      {taskListData
+        .filter((item) => {
+          if (filteringValue === all) {
+            return true;
+          }
+          if (filteringValue === active && item.tick === false) {
+            return false;
+          }
+          if (filteringValue === completed && item.tick === true) {
+            return false;
+          }
+          return true;
+        })
+        .map((objectWithTaskData) => {
+          return <Task key={objectWithTaskData.id} {...objectWithTaskData} />;
+        })}
     </ul>
   );
 };

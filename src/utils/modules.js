@@ -2,6 +2,9 @@
 export const generateId = () =>
   Math.round(Math.random() * 100000000000000).toString(16);
 
+// константа с названиями фильтров
+export const arrNameOfFilters = ['все', 'активные', 'завершенные'];
+
 // функция, проверяет длину строки
 export const checkLengthOfTheString = (str) => {
   if (str.trim().length > 0) {
