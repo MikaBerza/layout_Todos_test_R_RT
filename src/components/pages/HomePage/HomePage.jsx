@@ -185,7 +185,7 @@ const HomePage = () => {
 
         {showTasks && (
           <section className={style.outputTask}>
-            <ListTask nameOfFilters={arrNameOfFilters} />
+            <ListTask />
           </section>
         )}
       </main>

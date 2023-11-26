@@ -3,6 +3,7 @@ import taskListDataSlice from './slices/taskListDataSlice';
 import textareaMessageSlice from './slices/textareaMessageSlice';
 import buttonGroupSlice from './slices/buttonGroupSlice';
 import filteringSlice from './slices/filteringSlice';
+import searchSlice from './slices/searchSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     textareaMessageSlice: textareaMessageSlice,
     buttonGroupSlice: buttonGroupSlice,
     filteringSlice: filteringSlice,
+    searchSlice: searchSlice,
   },
 });

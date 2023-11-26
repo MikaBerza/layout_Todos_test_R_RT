@@ -139,3 +139,44 @@ export const replaceTaskToTheListWhenEditing = (
   });
   return newArrayTaskListData;
 };
+
+// функция, поиск задач
+export const searchForTasks = (arrayTaskListData, searchStringText) => {
+  const searchStringTextUpperCase = searchStringText.toUpperCase();
+
+  const newArrayTaskListData = arrayTaskListData.filter((item) => {
+    if (item.note.toUpperCase().indexOf(searchStringTextUpperCase) > -1) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  return newArrayTaskListData;
+};
+
+// функция, фильтровать задачи
+export const filterTasks = (
+  arrayTaskListData,
+  filterValue,
+  arrayOfFilterNames
+) => {
+  // присвоим значения массива, в переменные all, active, completed
+  // const [all, active, completed] = arrayOfFilterNames;
+  const [all, active, completed] = arrayOfFilterNames;
+
+  const newArrayTaskListData = arrayTaskListData.filter((item) => {
+    if (filterValue === all) {
+      return true;
+    }
+    if (filterValue === active && item.tick === false) {
+      return true;
+    }
+    if (filterValue === completed && item.tick === true) {
+      return true;
+    }
+    return false;
+  });
+
+  return newArrayTaskListData;
+};
