@@ -1,9 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setFiltering } from '../../../redux/slices/filteringSlice';
+
+import { arrNameOfFilters } from '../../../utils/modules';
 import style from './filtering.module.css';
 
-const Filtering = ({ title, nameOfFilters }) => {
+const Filtering = ({ title }) => {
+  const { filteringValue } = useSelector((state) => state.filteringSlice);
+  const { searchValue } = useSelector((state) => state.searchSlice);
   const dispatch = useDispatch();
 
   // функция, получить значение выбора
@@ -17,8 +21,11 @@ const Filtering = ({ title, nameOfFilters }) => {
       <select
         className={style.select}
         onChange={(event) => getTheSelectionValue(event)}
+        value={
+          searchValue.trim().length > 0 ? arrNameOfFilters[0] : filteringValue
+        }
       >
-        {nameOfFilters.map((item, index) => {
+        {arrNameOfFilters.map((item, index) => {
           return (
             <option key={index} value={item}>
               {item}

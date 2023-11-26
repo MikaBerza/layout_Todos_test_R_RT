@@ -16,7 +16,6 @@ import ButtonGroup from '../../group/buttonGroup/ButtonGroup.jsx';
 import ListTask from '../../group/listTaskGroup/ListTask.jsx';
 
 import {
-  arrNameOfFilters,
   writeToLocalStorage,
   addTaskToTheList,
   replaceTaskToTheListWhenEditing,
@@ -175,7 +174,7 @@ const HomePage = () => {
         <section className={style.control}>
           <Search placeholders={'🔍 поиск задач'} />
           <Indicator />
-          <Filtering title={'фильтрация'} nameOfFilters={arrNameOfFilters} />
+          <Filtering title={'фильтрация'} />
         </section>
 
         <section className={style.enteringTask}>

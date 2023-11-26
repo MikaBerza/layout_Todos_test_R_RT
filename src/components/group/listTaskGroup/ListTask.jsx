@@ -11,8 +11,8 @@ import style from './listTask.module.css';
 
 const ListTask = () => {
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
-  const { filteringValue } = useSelector((state) => state.filteringSlice);
   const { searchValue } = useSelector((state) => state.searchSlice);
+  const { filteringValue } = useSelector((state) => state.filteringSlice);
 
   // если условие выполняется, то дальше по коду не идем, вернет null
   if (taskListData === null) {
