@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../../../redux/slices/searchSlice';
 import style from './search.module.css';
 
-const Search = ({ placeholders }) => {
+const Search = React.memo(({ placeholders }) => {
   const { searchValue } = useSelector((state) => state.searchSlice);
   const dispatch = useDispatch();
 
+  // функция, обработать изменение ввода
   const handleInputChange = (event) => {
     dispatch(setSearchValue(event.target.value));
   };
@@ -22,6 +23,9 @@ const Search = ({ placeholders }) => {
       />
     </div>
   );
-};
+});
 
+// для отображения имени компонента в дереве компонентов 
+// используем метод displayName
+Search.displayName = 'Search';
 export default Search;

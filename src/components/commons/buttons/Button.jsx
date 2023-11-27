@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
 import style from './button.module.css';
 
-const Button = ({ name, handleButtonClick }) => {
+const Button = React.memo(({ name, handleButtonClick }) => {
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
 
   return (
@@ -18,6 +17,9 @@ const Button = ({ name, handleButtonClick }) => {
       </button>
     </>
   );
-};
+});
 
+// для отображения имени компонента в дереве компонентов
+// используем метод displayName
+Button.displayName = 'Button';
 export default Button;

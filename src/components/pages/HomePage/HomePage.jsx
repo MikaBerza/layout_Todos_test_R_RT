@@ -20,7 +20,6 @@ import {
   addTaskToTheList,
   replaceTaskToTheListWhenEditing,
 } from '../../../utils/modules.js';
-
 import style from './homePage.module.css';
 
 const HomePage = () => {
@@ -36,6 +35,13 @@ const HomePage = () => {
     (state) => state.textareaMessageSlice
   );
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
+  /*
+     useDispatch - это хук библиотеки Redux, используем его
+     для получения функции dispatch из Redux store. 
+     Функция dispatch принимает действие(action) в качестве аргумента
+     и передает его в редюсеры для обновления состояния приложения.
+     Вызов функции dispatch позволяет инициировать изменения состояния Redux.
+  */
   const dispatch = useDispatch();
 
   React.useEffect(() => {

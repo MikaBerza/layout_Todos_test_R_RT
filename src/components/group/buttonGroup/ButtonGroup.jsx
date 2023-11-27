@@ -17,28 +17,16 @@ import {
 import Button from '../../commons/buttons/Button.jsx';
 import style from './buttonGroup.module.css';
 
-const ButtonGroup = () => {
-  /* 
-     используем хук useSelector из библиотеки Redux 
-     для получения значений (taskListData) из состояния,
-     с помощью селектора taskListDataSlice 
-  */
+const ButtonGroup = React.memo(() => {
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
   const { textareaMessage } = useSelector(
     (state) => state.textareaMessageSlice
   );
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
-  /*
-     useDispatch - это хук библиотеки Redux, используем его
-     для получения функции dispatch из Redux store. 
-     Функция dispatch принимает действие(action) в качестве аргумента
-     и передает его в редюсеры для обновления состояния приложения.
-     Вызов функции dispatch позволяет инициировать изменения состояния Redux.
-     */
   const dispatch = useDispatch();
 
   // функция, обработать добавление задачи с помощью кнопки 'Добавить'
-  const handleAddTaskByAddButton = () => {
+  const handleAddTaskByAddButton = React.useCallback(() => {
     // запишем в константу результат выполнения функции
     const executionResults = addTaskToTheList(taskListData, textareaMessage);
 
@@ -76,10 +64,10 @@ const ButtonGroup = () => {
         dispatch(setTextareaMessage(''));
       }
     }
-  };
+  }, [dispatch, taskListData, textareaMessage]);
 
   // функция, обработать замену задачи с помощью кнопки 'Редактировать'
-  const handleAddTaskByReplaceButton = () => {
+  const handleAddTaskByReplaceButton = React.useCallback(() => {
     // запишем в константу возвращенный массив данных списка задач
     const arrayOfTaskListData = replaceTaskToTheListWhenEditing(
       taskListData,
@@ -96,10 +84,10 @@ const ButtonGroup = () => {
     dispatch(setEditButton(false));
     // показываем все задачи
     dispatch(setShowTasks(true));
-  };
+  }, [dispatch, taskListData, textareaMessage]);
 
   // функция, установить или снять все флажки
-  const checkOrClearAllCheckboxes = () => {
+  const checkOrClearAllCheckboxes = React.useCallback(() => {
     if (taskListData !== null) {
       // копируем список задач с помощью оператора spread
       const copyTaskListData = [...taskListData];
@@ -129,10 +117,10 @@ const ButtonGroup = () => {
       // записываем данные в localStorage
       writeToLocalStorage(newTaskListData);
     }
-  };
+  }, [dispatch, taskListData]);
 
   // функция, проверить наличие установленных флажков
-  const checkForCheckboxes = () => {
+  const checkForCheckboxes = React.useCallback(() => {
     if (taskListData !== null) {
       const result = taskListData.find((item) => {
         return item.tick === true;
@@ -140,10 +128,10 @@ const ButtonGroup = () => {
       return result !== undefined ? true : false;
     }
     return false;
-  };
+  }, [taskListData]);
 
   // функция, удалить задачи с флажками
-  const removeTasksWithCheckboxes = () => {
+  const removeTasksWithCheckboxes = React.useCallback(() => {
     if (taskListData !== null) {
       // копируем список задач с помощью оператора spread
       const copyTaskListData = [...taskListData];
@@ -156,7 +144,7 @@ const ButtonGroup = () => {
       // записываем данные в localStorage
       writeToLocalStorage(newTaskListData);
     }
-  };
+  }, [dispatch, taskListData]);
 
   return (
     <div className={style.buttons}>
@@ -187,6 +175,9 @@ const ButtonGroup = () => {
       )}
     </div>
   );
-};
+});
 
+// для отображения имени компонента в дереве компонентов
+// используем метод displayName
+ButtonGroup.displayName = 'ButtonGroup';
 export default ButtonGroup;

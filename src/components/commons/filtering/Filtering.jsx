@@ -5,7 +5,7 @@ import { setFiltering } from '../../../redux/slices/filteringSlice';
 import { arrNameOfFilters } from '../../../utils/modules';
 import style from './filtering.module.css';
 
-const Filtering = ({ title }) => {
+const Filtering = React.memo(({ title }) => {
   const { filteringValue } = useSelector((state) => state.filteringSlice);
   const { searchValue } = useSelector((state) => state.searchSlice);
   const dispatch = useDispatch();
@@ -35,6 +35,9 @@ const Filtering = ({ title }) => {
       </select>
     </div>
   );
-};
+});
 
+// для отображения имени компонента в дереве компонентов 
+// используем метод displayName
+Filtering.displayName = 'Filtering';
 export default Filtering;

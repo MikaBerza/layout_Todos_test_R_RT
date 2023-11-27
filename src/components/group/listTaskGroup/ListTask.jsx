@@ -9,7 +9,7 @@ import {
 } from '../../../utils/modules.js';
 import style from './listTask.module.css';
 
-const ListTask = () => {
+const ListTask = React.memo(() => {
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
   const { searchValue } = useSelector((state) => state.searchSlice);
   const { filteringValue } = useSelector((state) => state.filteringSlice);
@@ -38,6 +38,9 @@ const ListTask = () => {
           )}
     </ul>
   );
-};
+});
 
+// для отображения имени компонента в дереве компонентов 
+// используем метод displayName
+ListTask.displayName = 'ListTask';
 export default ListTask;

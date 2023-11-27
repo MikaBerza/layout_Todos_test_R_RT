@@ -1,7 +1,6 @@
 import React from 'react';
-import style from './indicator.module.css';
-
 import { useSelector } from 'react-redux';
+import style from './indicator.module.css';
 
 // используем (React.memo) для предотвращения ненужных повторных рендеров
 const Indicator = React.memo(() => {
@@ -14,7 +13,7 @@ const Indicator = React.memo(() => {
   });
 
   // проценты
-  // использованием хука (useMemo), чтобы избежать вычислений при каждом рендере
+  // используем хук (useMemo), чтобы избежать вычислений при каждом рендере
   const lowValue = React.useMemo(() => {
     const thirtyPercent = 0.3;
     (taskCounters.allTaskCounter * thirtyPercent).toFixed(2);
@@ -30,7 +29,7 @@ const Indicator = React.memo(() => {
     (taskCounters.allTaskCounter * ninetyPercent).toFixed(2);
   }, [taskCounters.allTaskCounter]);
 
-  // использованием хука (useCallback), для сохранения ссылки на функцию
+  // используем хук (useCallback), для сохранения ссылки на функцию
   const calcActiveAndCompletedTasks = React.useCallback(() => {
     let activeCount = 0;
     let completedCount = 0;
@@ -75,4 +74,7 @@ const Indicator = React.memo(() => {
   );
 });
 
+// для отображения имени компонента в дереве компонентов 
+// используем метод displayName
+Indicator.displayName = 'Indicator';
 export default Indicator;
