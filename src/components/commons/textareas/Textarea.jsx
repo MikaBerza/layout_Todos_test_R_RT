@@ -27,7 +27,5 @@ const Textarea = React.memo(({ placeholders }) => {
   );
 });
 
-// для отображения имени компонента в дереве компонентов
-// используем метод displayName
 Textarea.displayName = 'Textarea';
 export default Textarea;

@@ -37,7 +37,5 @@ const Filtering = React.memo(({ title }) => {
   );
 });
 
-// для отображения имени компонента в дереве компонентов 
-// используем метод displayName
 Filtering.displayName = 'Filtering';
 export default Filtering;

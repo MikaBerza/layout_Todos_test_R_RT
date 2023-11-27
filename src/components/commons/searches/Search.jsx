@@ -25,7 +25,5 @@ const Search = React.memo(({ placeholders }) => {
   );
 });
 
-// для отображения имени компонента в дереве компонентов 
-// используем метод displayName
 Search.displayName = 'Search';
 export default Search;

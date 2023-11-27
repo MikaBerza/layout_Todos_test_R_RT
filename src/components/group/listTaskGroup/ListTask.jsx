@@ -40,7 +40,5 @@ const ListTask = React.memo(() => {
   );
 });
 
-// для отображения имени компонента в дереве компонентов 
-// используем метод displayName
 ListTask.displayName = 'ListTask';
 export default ListTask;

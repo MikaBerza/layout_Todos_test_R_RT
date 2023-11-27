@@ -9,4 +9,5 @@ const Header = ({ title }) => {
   );
 }
 
+Header.displayName = 'Header';
 export default Header;

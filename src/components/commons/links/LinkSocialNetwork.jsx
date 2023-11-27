@@ -12,4 +12,5 @@ const LinkSocialNetwork = ({ name, logo, address }) => {
   );
 };
 
+LinkSocialNetwork.displayName = 'LinkSocialNetwork';
 export default LinkSocialNetwork;

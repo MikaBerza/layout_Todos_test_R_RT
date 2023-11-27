@@ -198,4 +198,7 @@ const HomePage = () => {
   );
 };
 
+// для отображения имени компонента в дереве компонентов
+// используем метод displayName
+HomePage.displayName = 'HomePage';
 export default HomePage;

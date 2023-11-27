@@ -37,4 +37,5 @@ const Footer = ({ caption }) => {
   );
 };
 
+Footer.displayName = 'Footer';
 export default Footer;

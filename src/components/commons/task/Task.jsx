@@ -105,7 +105,5 @@ const Task = React.memo(
   }
 );
 
-// для отображения имени компонента в дереве компонентов
-// используем метод displayName
 Task.displayName = 'Task';
 export default Task;

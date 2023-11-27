@@ -74,7 +74,5 @@ const Indicator = React.memo(() => {
   );
 });
 
-// для отображения имени компонента в дереве компонентов 
-// используем метод displayName
 Indicator.displayName = 'Indicator';
 export default Indicator;

@@ -19,7 +19,5 @@ const Button = React.memo(({ name, handleButtonClick }) => {
   );
 });
 
-// для отображения имени компонента в дереве компонентов
-// используем метод displayName
 Button.displayName = 'Button';
 export default Button;
