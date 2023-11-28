@@ -12,32 +12,38 @@ const Indicator = React.memo(() => {
     completedTaskCounter: 0,
   });
 
-  // проценты
+  // функция, определить предел и значение
+  const determineTheLimitAndValue = React.useCallback(
+    (percent) => (taskCounters.allTaskCounter * percent).toFixed(2),
+    [taskCounters.allTaskCounter]
+  );
+
   // используем хук (useMemo), чтобы избежать вычислений при каждом рендере
+  // Определяет предел, при достижении которого значение считается низким
   const lowValue = React.useMemo(() => {
-    const thirtyPercent = 0.3;
-    (taskCounters.allTaskCounter * thirtyPercent).toFixed(2);
-  }, [taskCounters.allTaskCounter]);
+    determineTheLimitAndValue(0.3);
+  }, [determineTheLimitAndValue]);
 
+  // Определяет предел, при достижении которого значение считается высоким
   const highValue = React.useMemo(() => {
-    const sixtyPercent = 0.6;
-    (taskCounters.allTaskCounter * sixtyPercent).toFixed(2);
-  }, [taskCounters.allTaskCounter]);
+    determineTheLimitAndValue(0.6);
+  }, [determineTheLimitAndValue]);
 
+  // Определяет наилучшее или оптимальное значение
   const optimumValue = React.useMemo(() => {
-    const ninetyPercent = 0.9;
-    (taskCounters.allTaskCounter * ninetyPercent).toFixed(2);
-  }, [taskCounters.allTaskCounter]);
+    determineTheLimitAndValue(0.9);
+  }, [determineTheLimitAndValue]);
 
   // используем хук (useCallback), для сохранения ссылки на функцию
+  // функция, вычислить активные и завершенные задачи
   const calcActiveAndCompletedTasks = React.useCallback(() => {
     let activeCount = 0;
     let completedCount = 0;
     if (taskListData !== null) {
       taskListData.forEach((item) => {
-        if (item.tick === true) {
+        if (item.tick) {
           completedCount += 1;
-        } else if (item.tick === false) {
+        } else if (!item.tick) {
           activeCount += 1;
         }
       });
@@ -69,7 +75,7 @@ const Indicator = React.memo(() => {
         high={highValue}
         max={taskCounters.allTaskCounter}
         optimum={optimumValue}
-      ></meter>
+      />
     </div>
   );
 });
