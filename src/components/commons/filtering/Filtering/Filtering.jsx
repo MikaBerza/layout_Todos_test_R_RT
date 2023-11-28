@@ -15,23 +15,27 @@ const Filtering = React.memo(() => {
     dispatch(setFiltering(event.target.value));
   };
 
+  // вынес условие в отдельную константу
+  const filteredValue = searchValue.trim().length
+    ? arrNameOfFilters[0]
+    : filteringValue;
+
+  // функция, сгенерировать (JSX) элемент (option)
+  const generateOptionElement = (item, index) => (
+    <option key={index} value={item}>
+      {item}
+    </option>
+  );
+
   return (
     <div className={style.wrapper}>
       <span className={style.text}>Фильтрация</span>
       <select
         className={style.select}
-        onChange={(event) => getTheSelectionValue(event)}
-        value={
-          searchValue.trim().length > 0 ? arrNameOfFilters[0] : filteringValue
-        }
+        onChange={getTheSelectionValue}
+        value={filteredValue}
       >
-        {arrNameOfFilters.map((item, index) => {
-          return (
-            <option key={index} value={item}>
-              {item}
-            </option>
-          );
-        })}
+        {arrNameOfFilters.map(generateOptionElement)}
       </select>
     </div>
   );
