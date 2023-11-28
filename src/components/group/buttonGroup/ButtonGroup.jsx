@@ -89,29 +89,18 @@ const ButtonGroup = React.memo(() => {
   // функция, установить или снять все флажки
   const checkOrClearAllCheckboxes = React.useCallback(() => {
     if (taskListData !== null) {
-      // копируем список задач с помощью оператора spread
-      const copyTaskListData = [...taskListData];
-      const newTaskListData = [];
-      let counterTrue = 0;
+      /*
+      Метод массива .every() позволяет узнать, удовлетворяют ли
+      все элементы в массиве условию в функции-колбэке
+      */
+      // определяем все ли флажки стоят
+      const isAllChecked = taskListData.every((item) => item.tick);
+      // собираем мапом новый массив исходя из isAllChecked
+      const newTaskListData = taskListData.map((item) => ({
+        ...item,
+        tick: !isAllChecked, // если все вкл, то выключаем иначе все включаем
+      }));
 
-      copyTaskListData.forEach((item) => {
-        if (item.tick === true) {
-          counterTrue += 1;
-        }
-      });
-
-      if (counterTrue === copyTaskListData.length) {
-        copyTaskListData.forEach((item) => {
-          const newItem = { ...item, tick: false };
-          newTaskListData.push(newItem);
-        });
-      }
-      if (counterTrue !== copyTaskListData.length) {
-        copyTaskListData.forEach((item) => {
-          const newItem = { ...item, tick: true };
-          newTaskListData.push(newItem);
-        });
-      }
       // обновляем данные списка задач
       dispatch(setTaskListData(newTaskListData));
       // записываем данные в localStorage
@@ -119,13 +108,14 @@ const ButtonGroup = React.memo(() => {
     }
   }, [dispatch, taskListData]);
 
-  // функция, проверить наличие установленных флажков
-  const checkForCheckboxes = React.useCallback(() => {
+  // константа, содержащая результат хука(useMemo), наличие флажка
+  const presenceOfCheckbox = React.useMemo(() => {
     if (taskListData !== null) {
-      const result = taskListData.find((item) => {
-        return item.tick === true;
-      });
-      return result !== undefined ? true : false;
+      /*
+      Метод массива .some(), проверяет, есть ли в массиве
+      хоть один элемент, подходящий под условие
+      */
+      return taskListData.some((item) => item.tick);
     }
     return false;
   }, [taskListData]);
@@ -133,12 +123,8 @@ const ButtonGroup = React.memo(() => {
   // функция, удалить задачи с флажками
   const removeTasksWithCheckboxes = React.useCallback(() => {
     if (taskListData !== null) {
-      // копируем список задач с помощью оператора spread
-      const copyTaskListData = [...taskListData];
       // удаляем задачу из списка
-      const newTaskListData = copyTaskListData.filter(
-        (item) => item.tick !== true
-      );
+      const newTaskListData = taskListData.filter((item) => !item.tick);
       // обновляем данные списка задач
       dispatch(setTaskListData(newTaskListData));
       // записываем данные в localStorage
@@ -148,15 +134,13 @@ const ButtonGroup = React.memo(() => {
 
   return (
     <div className={style.buttons}>
-      {editButton === false ? (
+      {!editButton ? (
         <>
           <Button
             name='Выбрать всё'
             handleButtonClick={checkOrClearAllCheckboxes}
           />
-          {checkForCheckboxes() === false ? (
-            ''
-          ) : (
+          {presenceOfCheckbox && (
             <Button
               name='Удалить'
               handleButtonClick={removeTasksWithCheckboxes}
