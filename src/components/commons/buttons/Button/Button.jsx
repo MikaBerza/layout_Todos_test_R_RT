@@ -17,16 +17,12 @@ const Button = React.memo(({ name, handleButtonClick }) => {
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
 
   return (
-    <>
-      <button
-        className={
-          editButton === false ? style.item : `${style.item} ${style.edit}`
-        }
-        onClick={handleButtonClick}
-      >
-        {name}
-      </button>
-    </>
+    <button
+      className={!editButton ? style.item : `${style.item} ${style.edit}`}
+      onClick={handleButtonClick}
+    >
+      {name}
+    </button>
   );
 });
 
