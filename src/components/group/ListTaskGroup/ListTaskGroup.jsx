@@ -19,23 +19,25 @@ const ListTaskGroup = React.memo(() => {
     return null;
   }
 
+  // функция, сгенерировать (JSX) элемент (Task)
+  const generateTaskElement = (objectWithTaskData) => {
+    return <Task key={objectWithTaskData.id} {...objectWithTaskData} />;
+  };
+
   return (
     <ul className={style.item}>
-      {searchValue.trim().length > 0
-        ? searchForTasks(taskListData, searchValue).map(
-            (objectWithTaskData) => {
-              return (
-                <Task key={objectWithTaskData.id} {...objectWithTaskData} />
-              );
-            }
-          )
-        : filterTasks(taskListData, filteringValue, arrNameOfFilters).map(
-            (objectWithTaskData) => {
-              return (
-                <Task key={objectWithTaskData.id} {...objectWithTaskData} />
-              );
-            }
-          )}
+      {(searchValue.trim().length
+        ? searchForTasks(taskListData, searchValue)
+        : filterTasks(taskListData, filteringValue, arrNameOfFilters)
+        /*
+        элемент (objectWithTaskData) попадает в функцию (generateTaskElement) как параметр,
+        потому что при вызове map(generateTaskElement), каждый элемент массива,
+        по которому проходит итерация, будет передан в качестве аргумента
+        в функцию (generateTaskElement).
+        Это встроенное поведение map, которое автоматически передает
+        текущий элемент как аргумент в коллбэк функцию, которую мы передаем в map.
+        */
+      ).map(generateTaskElement)}
     </ul>
   );
 });
