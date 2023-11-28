@@ -23,7 +23,7 @@ const Textarea = React.memo(() => {
       placeholder='Что нужно сделать?'
       value={textareaMessage}
       onChange={handleTextareaMessageChange}
-    ></textarea>
+    />
   );
 });
 
