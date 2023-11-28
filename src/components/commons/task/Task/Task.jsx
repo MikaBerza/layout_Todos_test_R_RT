@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -14,6 +15,15 @@ import style from './task.module.css';
 
 const Task = React.memo(
   ({ id, note, date: calendarDate, sign, tick: checking }) => {
+    // 
+    Task.propTypes = {
+      id: PropTypes.string,
+      note: PropTypes.string,
+      date: PropTypes.string,
+      sign: PropTypes.string,
+      tick: PropTypes.bool,
+    };
+
     const { taskListData } = useSelector((state) => state.taskListDataSlice);
     const dispatch = useDispatch();
 

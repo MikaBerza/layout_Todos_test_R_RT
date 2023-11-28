@@ -177,13 +177,13 @@ const HomePage = () => {
         }}
       >
         <section className={style.control}>
-          <Search placeholders='🔍 поиск задач' />
+          <Search />
           <Indicator />
-          <Filtering title='фильтрация' />
+          <Filtering />
         </section>
 
         <section className={style.enteringTask}>
-          <Textarea placeholders='Что нужно сделать?' />
+          <Textarea />
           <ButtonGroup />
         </section>
 

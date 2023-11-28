@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../../../../redux/slices/searchSlice';
 import style from './search.module.css';
 
-const Search = React.memo(({ placeholders }) => {
+const Search = React.memo(() => {
   const { searchValue } = useSelector((state) => state.searchSlice);
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const Search = React.memo(({ placeholders }) => {
       <input
         className={style.item}
         type='search'
-        placeholder={placeholders}
+        placeholder='🔍 поиск задач'
         value={searchValue}
         onChange={handleInputChange}
       />

@@ -1,10 +1,10 @@
 import React from 'react';
 import style from './header.module.css';
 
-const Header = ({ title }) => {
+const Header = () => {
   return (
     <header className={style.wrapper}>
-      <h1 className={style.mainTitle}>{title}</h1>
+      <h1 className={style.mainTitle}>Todos</h1>
     </header>
   );
 };

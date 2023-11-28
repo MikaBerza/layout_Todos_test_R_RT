@@ -4,7 +4,7 @@ import { setTextareaMessage } from '../../../../redux/slices/textareaMessageSlic
 
 import style from './textarea.module.css';
 
-const Textarea = React.memo(({ placeholders }) => {
+const Textarea = React.memo(() => {
   const { textareaMessage } = useSelector(
     (state) => state.textareaMessageSlice
   );
@@ -20,7 +20,7 @@ const Textarea = React.memo(({ placeholders }) => {
     <textarea
       className={style.item}
       rows='13'
-      placeholder={placeholders}
+      placeholder='Что нужно сделать?'
       value={textareaMessage}
       onChange={handleTextareaMessageChange}
     ></textarea>

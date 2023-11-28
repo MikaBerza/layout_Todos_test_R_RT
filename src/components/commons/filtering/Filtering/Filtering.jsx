@@ -5,7 +5,7 @@ import { setFiltering } from '../../../../redux/slices/filteringSlice';
 import { arrNameOfFilters } from '../../../../utils/modules';
 import style from './filtering.module.css';
 
-const Filtering = React.memo(({ title }) => {
+const Filtering = React.memo(() => {
   const { filteringValue } = useSelector((state) => state.filteringSlice);
   const { searchValue } = useSelector((state) => state.searchSlice);
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Filtering = React.memo(({ title }) => {
 
   return (
     <div className={style.wrapper}>
-      <span className={style.text}>{title}</span>
+      <span className={style.text}>Фильтрация</span>
       <select
         className={style.select}
         onChange={(event) => getTheSelectionValue(event)}

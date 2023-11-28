@@ -7,12 +7,12 @@ import vkontakteLogo from '../../../../assets/images/vkontakteIcon.png';
 import LinkSocialNetwork from '../../links/LinkSocialNetwork/LinkSocialNetwork';
 import style from './footer.module.css';
 
-const Footer = ({ caption }) => {
+const Footer = () => {
   return (
     <footer className={style.wrapper}>
       <div className={style.inner}>
         <div className={style.text}>
-          <span>{caption}</span>
+          <span>Наши социальные сети</span>
         </div>
         <div className={style.socials}>
           <LinkSocialNetwork

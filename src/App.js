@@ -6,9 +6,9 @@ import './App.css';
 function App() {
   return (
     <>
-      <Header title='Todos' />
+      <Header />
       <HomePage />
-      <Footer caption='Наши социальные сети' />
+      <Footer />
     </>
   );
 }
