@@ -6,12 +6,7 @@ export const generateId = () =>
 export const arrNameOfFilters = ['все', 'активные', 'завершенные'];
 
 // функция, проверяет длину строки
-export const checkLengthOfTheString = (str) => {
-  if (str.trim().length > 0) {
-    return true;
-  }
-  return false;
-};
+export const checkLengthOfTheString = (str) => str.trim().length > 0;
 
 // функция, возвращает объект с данными из localStorage
 export const returnAnObjectWithDataFromLocalStorage = () => {
@@ -40,9 +35,7 @@ export const writeToLocalStorage = (
       'keyTaskDataset',
       JSON.stringify(arrayTaskListData)
     );
-  }
-
-  if (objEnteredData !== null) {
+  } else {
     arrayTaskListData.unshift(objEnteredData);
     window.localStorage.setItem(
       'keyTaskDataset',
@@ -53,21 +46,15 @@ export const writeToLocalStorage = (
 
 // функция, добавить задачу в список задач
 export const addTaskToTheList = (arrayTaskListData, textareaText) => {
-  // формируем объект с датой
-  const recordingDate = new Date(Date.now()).toLocaleDateString('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit',
-  });
-
-  if (
-    arrayTaskListData === null &&
-    checkLengthOfTheString(textareaText) === true
-  ) {
-    // создаем пустой массив
-    const newArrayTaskListData = [];
+  if (checkLengthOfTheString(textareaText)) {
+    // формируем объект с датой
+    const recordingDate = new Date(Date.now()).toLocaleDateString('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+    });
     // формируем объект с данными
     const objTaskData = {
       id: generateId(),
@@ -77,29 +64,20 @@ export const addTaskToTheList = (arrayTaskListData, textareaText) => {
       editing: false,
       sign: 'x',
     };
-    // статус задачи
-    const taskStatus = 'first task';
-    return [taskStatus, objTaskData, newArrayTaskListData];
-  }
 
-  if (
-    arrayTaskListData !== null &&
-    checkLengthOfTheString(textareaText) === true
-  ) {
-    // копируем список задач с помощью оператора spread
-    const copyTaskListData = [...arrayTaskListData];
-    // формируем объект с данными
-    const objTaskData = {
-      id: generateId(),
-      note: textareaText.trim(),
-      date: recordingDate,
-      tick: false,
-      editing: false,
-      sign: 'x',
-    };
-    // статус задачи
-    const taskStatus = 'next task';
-    return [taskStatus, objTaskData, copyTaskListData];
+    if (arrayTaskListData === null) {
+      // создаем пустой массив
+      const newArrayTaskListData = [];
+      // статус задачи
+      const taskStatus = 'first task';
+      return [taskStatus, objTaskData, newArrayTaskListData];
+    } else {
+      // копируем список задач с помощью оператора spread
+      const copyTaskListData = [...arrayTaskListData];
+      // статус задачи
+      const taskStatus = 'next task';
+      return [taskStatus, objTaskData, copyTaskListData];
+    }
   }
 
   return null;
@@ -120,7 +98,8 @@ export const replaceTaskToTheListWhenEditing = (
   });
 
   const newArrayTaskListData = arrayTaskListData.map((item) => {
-    if (item.editing === true && textareaText.length !== 0) {
+    // textareaText будет истинным, если не является пустой строкой(textareaText.length !== 0) или null
+    if (item.editing && textareaText) {
       // изменяем значение поля с записью (note), на то которое в (textarea)
       // изменяем состояние поля с ключом (editing), с (true) на (false)
       // изменяем объект с датой, на актуальную дату редактирования задачи
@@ -141,16 +120,13 @@ export const replaceTaskToTheListWhenEditing = (
 };
 
 // функция, поиск задач
-export const searchForTasks = (arrayTaskListData, searchStringText) => {
-  const searchStringTextUpperCase = searchStringText.toUpperCase();
+export const searchForTasks = (arrayTaskListData, searchString) => {
+  const searchStringTextUpperCase = searchString.toUpperCase();
 
-  const newArrayTaskListData = arrayTaskListData.filter((item) => {
-    if (item.note.toUpperCase().indexOf(searchStringTextUpperCase) > -1) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  // метод includes проверяет наличие элемента в массиве (метод возвращает либо true, либо false)
+  const newArrayTaskListData = arrayTaskListData.filter((item) =>
+    item.note.toUpperCase().includes(searchStringTextUpperCase)
+  );
 
   return newArrayTaskListData;
 };
@@ -169,10 +145,10 @@ export const filterTasks = (
     if (filterValue === all) {
       return true;
     }
-    if (filterValue === active && item.tick === false) {
+    if (filterValue === active && !item.tick) {
       return true;
     }
-    if (filterValue === completed && item.tick === true) {
+    if (filterValue === completed && item.tick) {
       return true;
     }
     return false;
