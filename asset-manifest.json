@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/layout_Todos_test_R_RT/static/css/main.d26c7ae0.css",
-    "main.js": "/layout_Todos_test_R_RT/static/js/main.d7fc4dd1.js",
+    "main.css": "/layout_Todos_test_R_RT/static/css/main.63aae714.css",
+    "main.js": "/layout_Todos_test_R_RT/static/js/main.6b235cd9.js",
     "static/media/1.51bird.svg": "/layout_Todos_test_R_RT/static/media/1.51bird.a0f3f67517f9f81798ab.svg",
     "static/media/Roboto-Medium.ttf": "/layout_Todos_test_R_RT/static/media/Roboto-Medium.7c8d04cd831df3033c8a.ttf",
     "static/media/Roboto-Thin.ttf": "/layout_Todos_test_R_RT/static/media/Roboto-Thin.a732a12eb07742232407.ttf",
@@ -10,12 +10,12 @@
     "static/media/Roboto-Bold.ttf": "/layout_Todos_test_R_RT/static/media/Roboto-Bold.f80816a5455d171f948d.ttf",
     "static/media/Roboto-Light.ttf": "/layout_Todos_test_R_RT/static/media/Roboto-Light.333da16a3f3cc391d087.ttf",
     "index.html": "/layout_Todos_test_R_RT/index.html",
-    "static/media/VectorDown.svg": "/layout_Todos_test_R_RT/static/media/VectorDown.07cc8a172376a3a56db7.svg",
-    "main.d26c7ae0.css.map": "/layout_Todos_test_R_RT/static/css/main.d26c7ae0.css.map",
-    "main.d7fc4dd1.js.map": "/layout_Todos_test_R_RT/static/js/main.d7fc4dd1.js.map"
+    "static/media/VectorDown.svg": "/layout_Todos_test_R_RT/static/media/VectorDown.c1922c03ff034a571111.svg",
+    "main.63aae714.css.map": "/layout_Todos_test_R_RT/static/css/main.63aae714.css.map",
+    "main.6b235cd9.js.map": "/layout_Todos_test_R_RT/static/js/main.6b235cd9.js.map"
   },
   "entrypoints": [
-    "static/css/main.d26c7ae0.css",
-    "static/js/main.d7fc4dd1.js"
+    "static/css/main.63aae714.css",
+    "static/js/main.6b235cd9.js"
   ]
 }
