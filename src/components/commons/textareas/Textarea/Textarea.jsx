@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
+import { setTextareaMessage } from '../../../../redux/slices/textareaMessageSlice.js';
 
 import style from './textarea.module.css';
 

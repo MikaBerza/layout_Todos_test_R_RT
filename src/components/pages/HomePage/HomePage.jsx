@@ -8,12 +8,11 @@ import {
 import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
 import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
-import Search from '../../commons/searches/Search';
-import Indicator from '../../commons/indicators/Indicator';
-import Filtering from '../../commons/filtering/Filtering';
-import Textarea from '../../commons/textareas/Textarea';
-import ButtonGroup from '../../group/buttonGroup/ButtonGroup.jsx';
-import ListTask from '../../group/listTaskGroup/ListTask.jsx';
+import { Search } from '../../commons/searches/indexSearches.js';
+import { Indicator } from '../../commons/indicators/indexIndicators.js';
+import { Filtering } from '../../commons/filtering/indexFiltering.js';
+import { Textarea } from '../../commons/textareas/indexTextarea.js';
+import { ButtonGroup, ListTaskGroup } from '../../group/indexGroup.js';
 
 import {
   writeToLocalStorage,
@@ -178,19 +177,19 @@ const HomePage = () => {
         }}
       >
         <section className={style.control}>
-          <Search placeholders={'🔍 поиск задач'} />
+          <Search placeholders='🔍 поиск задач' />
           <Indicator />
-          <Filtering title={'фильтрация'} />
+          <Filtering title='фильтрация' />
         </section>
 
         <section className={style.enteringTask}>
-          <Textarea placeholders={'Что нужно сделать?'} />
+          <Textarea placeholders='Что нужно сделать?' />
           <ButtonGroup />
         </section>
 
         {showTasks && (
           <section className={style.outputTask}>
-            <ListTask />
+            <ListTaskGroup />
           </section>
         )}
       </main>

@@ -14,7 +14,7 @@ import {
   replaceTaskToTheListWhenEditing,
 } from '../../../utils/modules.js';
 
-import Button from '../../commons/buttons/Button.jsx';
+import { Button } from '../../commons/buttons/indexButtons.js';
 import style from './buttonGroup.module.css';
 
 const ButtonGroup = React.memo(() => {
@@ -151,25 +151,25 @@ const ButtonGroup = React.memo(() => {
       {editButton === false ? (
         <>
           <Button
-            name={'Выбрать всё'}
+            name='Выбрать всё'
             handleButtonClick={checkOrClearAllCheckboxes}
           />
           {checkForCheckboxes() === false ? (
             ''
           ) : (
             <Button
-              name={'Удалить'}
+              name='Удалить'
               handleButtonClick={removeTasksWithCheckboxes}
             />
           )}
           <Button
-            name={'Добавить'}
+            name='Добавить'
             handleButtonClick={handleAddTaskByAddButton}
           />
         </>
       ) : (
         <Button
-          name={'Редактировать'}
+          name='Редактировать'
           handleButtonClick={handleAddTaskByReplaceButton}
         />
       )}

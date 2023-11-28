@@ -7,7 +7,7 @@ const Header = ({ title }) => {
       <h1 className={style.mainTitle}>{title}</h1>
     </header>
   );
-}
+};
 
 Header.displayName = 'Header';
 export default Header;

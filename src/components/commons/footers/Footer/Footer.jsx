@@ -1,11 +1,10 @@
 import React from 'react';
 
-import instagramLogo from '../../../assets/images/instagramIcon.png';
-import facebookLogo from '../../../assets/images/facebookIcon.png';
-import vkontakteLogo from '../../../assets/images/vkontakteIcon.png';
+import instagramLogo from '../../../../assets/images/instagramIcon.png';
+import facebookLogo from '../../../../assets/images/facebookIcon.png';
+import vkontakteLogo from '../../../../assets/images/vkontakteIcon.png';
 
-import LinkSocialNetwork from '../links/LinkSocialNetwork';
-
+import LinkSocialNetwork from '../../links/LinkSocialNetwork/LinkSocialNetwork';
 import style from './footer.module.css';
 
 const Footer = ({ caption }) => {
@@ -17,19 +16,19 @@ const Footer = ({ caption }) => {
         </div>
         <div className={style.socials}>
           <LinkSocialNetwork
-            name={'instagram'}
+            name='instagram'
             logo={instagramLogo}
-            address={'#Instagram'}
+            address='#Instagram'
           />
           <LinkSocialNetwork
-            name={'facebook'}
+            name='facebook'
             logo={facebookLogo}
-            address={'#Facebook'}
+            address='#Facebook'
           />
           <LinkSocialNetwork
-            name={'vkontakte'}
+            name='vkontakte'
             logo={vkontakteLogo}
-            address={'#Vkontakte'}
+            address='#Vkontakte'
           />
         </div>
       </div>

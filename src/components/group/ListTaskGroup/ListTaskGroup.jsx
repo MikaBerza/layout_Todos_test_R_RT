@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Task from '../../commons/task/Task.jsx';
+import { Task } from '../../commons/task/indexTask.js';
 
 import {
   arrNameOfFilters,
   searchForTasks,
   filterTasks,
 } from '../../../utils/modules.js';
-import style from './listTask.module.css';
+import style from './listTaskGroup.module.css';
 
-const ListTask = React.memo(() => {
+const ListTaskGroup = React.memo(() => {
   const { taskListData } = useSelector((state) => state.taskListDataSlice);
   const { searchValue } = useSelector((state) => state.searchSlice);
   const { filteringValue } = useSelector((state) => state.filteringSlice);
@@ -40,5 +40,5 @@ const ListTask = React.memo(() => {
   );
 });
 
-ListTask.displayName = 'ListTask';
-export default ListTask;
+ListTaskGroup.displayName = 'ListTaskGroup';
+export default ListTaskGroup;

@@ -1,14 +1,14 @@
 import HomePage from './components/pages/HomePage/HomePage';
-import Header from './components/commons/headers/Header';
-import Footer from './components/commons/footers/Footer';
+import { Header } from './components/commons/headers/indexHeaders.js';
+import { Footer } from './components/commons/footers/indexFooters.js';
 import './App.css';
 
 function App() {
   return (
     <>
-      <Header title={'Todos'} />
+      <Header title='Todos' />
       <HomePage />
-      <Footer caption={'Наши социальные сети'} />
+      <Footer caption='Наши социальные сети' />
     </>
   );
 }
