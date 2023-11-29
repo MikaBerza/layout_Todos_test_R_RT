@@ -43,7 +43,7 @@ const Indicator = React.memo(() => {
       taskListData.forEach((item) => {
         if (item.tick) {
           completedCount += 1;
-        } else if (!item.tick) {
+        } else {
           activeCount += 1;
         }
       });
