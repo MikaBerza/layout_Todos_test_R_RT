@@ -1,6 +1,6 @@
-import HomePage from './components/pages/HomePage/HomePage';
-import { Header } from './components/commons/headers/indexHeaders.js';
-import { Footer } from './components/commons/footers/indexFooters.js';
+import { HomePage } from './components/pages/HomePage';
+import { Header } from './components/commons/headers/Header';
+import { Footer } from './components/commons/footers/Footer';
 import './App.css';
 
 function App() {

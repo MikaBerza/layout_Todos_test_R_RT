@@ -8,10 +8,10 @@ import {
 import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
 import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
-import { Search } from '../../commons/searches/indexSearches.js';
-import { Indicator } from '../../commons/indicators/indexIndicators.js';
-import { Filtering } from '../../commons/filtering/indexFiltering.js';
-import { Textarea } from '../../commons/textareas/indexTextarea.js';
+import { Search } from '../../commons/searches/Search';
+import { Indicator } from '../../commons/indicators/Indicator';
+import { Filtering } from '../../commons/filtering/Filtering';
+import { Textarea } from '../../commons/textareas/Textarea';
 import { ButtonGroup, ListTaskGroup } from '../../group/indexGroup.js';
 
 import {
