@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchValue } from '../../../../redux/slices/searchSlice';
+import { setSearchValue } from '../../../redux/slices/searchSlice';
 import style from './search.module.css';
 
 const Search = React.memo(() => {

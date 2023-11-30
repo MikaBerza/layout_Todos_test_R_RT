@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Task } from '../../commons/task/Task';
+import { Task } from '../../commons/Task';
 
 import {
   arrNameOfFilters,

@@ -5,11 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setTaskListData,
   setShowTasks,
-} from '../../../../redux/slices/taskListDataSlice.js';
-import { setTextareaMessage } from '../../../../redux/slices/textareaMessageSlice.js';
-import { setEditButton } from '../../../../redux/slices/buttonGroupSlice.js';
+} from '../../../redux/slices/taskListDataSlice.js';
+import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
+import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
-import { writeToLocalStorage } from '../../../../utils/modules.js';
+import { writeToLocalStorage } from '../../../utils/modules.js';
 import style from './task.module.css';
 
 // запись(date: calendarDate) означает, что значение свойства (date) теперь доступно под именем (calendarDate)

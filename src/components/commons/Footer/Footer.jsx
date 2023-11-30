@@ -1,10 +1,10 @@
 import React from 'react';
 
-import instagramLogo from '../../../../assets/images/instagramIcon.png';
-import facebookLogo from '../../../../assets/images/facebookIcon.png';
-import vkontakteLogo from '../../../../assets/images/vkontakteIcon.png';
+import instagramLogo from '../../../assets/images/instagramIcon.png';
+import facebookLogo from '../../../assets/images/facebookIcon.png';
+import vkontakteLogo from '../../../assets/images/vkontakteIcon.png';
 
-import { LinkSocialNetwork } from '../../links/LinkSocialNetwork';
+import { LinkSocialNetwork } from '../LinkSocialNetwork';
 import style from './footer.module.css';
 
 const Footer = () => {
