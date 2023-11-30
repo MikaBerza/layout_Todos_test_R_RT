@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setTaskListData,
   setShowTasks,
-} from '../../../redux/slices/taskListDataSlice.js';
-import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
+} from '../../../redux/slices/listTaskGroupSlice.js';
+import { setTextareaMessage } from '../../../redux/slices/textareaSlice.js';
 import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
 import { writeToLocalStorage } from '../../../utils/modules.js';
@@ -24,7 +24,7 @@ const Task = React.memo(
       tick: PropTypes.bool,
     };
 
-    const { taskListData } = useSelector((state) => state.taskListDataSlice);
+    const { taskListData } = useSelector((state) => state.listTaskGroupSlice);
     const dispatch = useDispatch();
 
     // функция, обработать вход в режим редактирования задачи

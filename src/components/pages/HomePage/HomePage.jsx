@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setTaskListData,
   setShowTasks,
-} from '../../../redux/slices/taskListDataSlice.js';
-import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
+} from '../../../redux/slices/listTaskGroupSlice.js';
+import { setTextareaMessage } from '../../../redux/slices/textareaSlice.js';
 import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
 import { Search } from '../../commons/Search';
@@ -25,13 +25,13 @@ const HomePage = () => {
   /* 
      используем хук useSelector из библиотеки Redux 
      для получения значений (taskListData) из состояния,
-     с помощью селектора taskListDataSlice 
+     с помощью селектора listTaskGroupSlice 
   */
   const { taskListData, showTasks } = useSelector(
-    (state) => state.taskListDataSlice
+    (state) => state.listTaskGroupSlice
   );
   const { textareaMessage } = useSelector(
-    (state) => state.textareaMessageSlice
+    (state) => state.textareaSlice
   );
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
   /*

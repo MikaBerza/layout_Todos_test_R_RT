@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import taskListDataSlice from './slices/taskListDataSlice';
-import textareaMessageSlice from './slices/textareaMessageSlice';
+import listTaskGroupSlice from './slices/listTaskGroupSlice';
+import textareaSlice from './slices/textareaSlice';
 import buttonGroupSlice from './slices/buttonGroupSlice';
 import filteringSlice from './slices/filteringSlice';
 import searchSlice from './slices/searchSlice';
 
 export const store = configureStore({
   reducer: {
-    taskListDataSlice: taskListDataSlice,
-    textareaMessageSlice: textareaMessageSlice,
+    listTaskGroupSlice: listTaskGroupSlice,
+    textareaSlice: textareaSlice,
     buttonGroupSlice: buttonGroupSlice,
     filteringSlice: filteringSlice,
     searchSlice: searchSlice,

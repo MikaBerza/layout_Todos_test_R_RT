@@ -4,7 +4,7 @@ import style from './indicator.module.css';
 
 // используем (React.memo) для предотвращения ненужных повторных рендеров
 const Indicator = React.memo(() => {
-  const { taskListData } = useSelector((state) => state.taskListDataSlice);
+  const { taskListData } = useSelector((state) => state.listTaskGroupSlice);
   // счетчики
   const [taskCounters, setTaskCounters] = React.useState({
     allTaskCounter: 0,

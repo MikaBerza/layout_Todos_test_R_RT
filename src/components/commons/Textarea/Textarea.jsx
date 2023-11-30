@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
+import { setTextareaMessage } from '../../../redux/slices/textareaSlice.js';
 
 import style from './textarea.module.css';
 
 const Textarea = React.memo(() => {
   const { textareaMessage } = useSelector(
-    (state) => state.textareaMessageSlice
+    (state) => state.textareaSlice
   );
   const dispatch = useDispatch();
 

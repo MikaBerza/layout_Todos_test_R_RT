@@ -5,7 +5,7 @@ const initialState = {
   textareaMessage: '',
 };
 
-export const textareaMessageSlice = createSlice({
+export const textareaSlice = createSlice({
   name: 'textareaMessage',
   initialState,
   reducers: {
@@ -15,6 +15,6 @@ export const textareaMessageSlice = createSlice({
   },
 });
 
-export const { setTextareaMessage } = textareaMessageSlice.actions;
+export const { setTextareaMessage } = textareaSlice.actions;
 
-export default textareaMessageSlice.reducer;
+export default textareaSlice.reducer;

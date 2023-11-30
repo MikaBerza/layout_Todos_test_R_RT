@@ -10,7 +10,7 @@ import {
 import style from './listTaskGroup.module.css';
 
 const ListTaskGroup = React.memo(() => {
-  const { taskListData } = useSelector((state) => state.taskListDataSlice);
+  const { taskListData } = useSelector((state) => state.listTaskGroupSlice);
   const { searchValue } = useSelector((state) => state.searchSlice);
   const { filteringValue } = useSelector((state) => state.filteringSlice);
 

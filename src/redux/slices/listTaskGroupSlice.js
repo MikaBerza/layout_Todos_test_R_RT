@@ -7,7 +7,7 @@ const initialState = {
   showTasks: true,
 };
 
-export const taskListDataSlice = createSlice({
+export const listTaskGroupSlice = createSlice({
   name: 'taskListData',
   initialState,
   reducers: {
@@ -20,6 +20,6 @@ export const taskListDataSlice = createSlice({
   },
 });
 
-export const { setTaskListData, setShowTasks } = taskListDataSlice.actions;
+export const { setTaskListData, setShowTasks } = listTaskGroupSlice.actions;
 
-export default taskListDataSlice.reducer;
+export default listTaskGroupSlice.reducer;

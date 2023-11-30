@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setTaskListData,
   setShowTasks,
-} from '../../../redux/slices/taskListDataSlice.js';
-import { setTextareaMessage } from '../../../redux/slices/textareaMessageSlice.js';
+} from '../../../redux/slices/listTaskGroupSlice.js';
+import { setTextareaMessage } from '../../../redux/slices/textareaSlice.js';
 import { setEditButton } from '../../../redux/slices/buttonGroupSlice.js';
 
 import {
@@ -18,9 +18,9 @@ import { Button } from '../../commons/Button';
 import style from './buttonGroup.module.css';
 
 const ButtonGroup = React.memo(() => {
-  const { taskListData } = useSelector((state) => state.taskListDataSlice);
+  const { taskListData } = useSelector((state) => state.listTaskGroupSlice);
   const { textareaMessage } = useSelector(
-    (state) => state.textareaMessageSlice
+    (state) => state.textareaSlice
   );
   const { editButton } = useSelector((state) => state.buttonGroupSlice);
   const dispatch = useDispatch();
