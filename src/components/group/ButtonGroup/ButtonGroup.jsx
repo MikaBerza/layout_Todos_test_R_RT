@@ -14,7 +14,7 @@ import {
   replaceTaskToTheListWhenEditing,
 } from '../../../utils/modules.js';
 
-import { Button } from '../../commons/Button';
+import { Button } from '../../commons/Button/index.js';
 import style from './buttonGroup.module.css';
 
 const ButtonGroup = React.memo(() => {
