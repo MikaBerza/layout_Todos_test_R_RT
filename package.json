@@ -1,6 +1,9 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=18.6.1 <=18.18.0"
+  },
   "private": true,
   "homepage": "https://mikaberza.github.io/layout_Todos_test_R_RT/",
   "dependencies": {
